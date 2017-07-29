@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import firebase from 'firebase';
 import {observer} from "mobx-react";
+import state from '../store/state';
 
 //import state from 'store/state';
 
@@ -274,7 +275,16 @@ class ProjectNew extends Component {
         title: this.state.project.title,
         abstract: this.state.project.abstract,
         image_url: snapshot.downloadURL,
-        created_at: new Date(),
+        created_at: this.state.project.created_at,
+        owner: state.currentUser.uid,
+        valuation: '100000',
+        category: this.state.project.category,
+        income: this.state.project.income,
+        address: this.state.project.address,
+        tel: this.state.project.tel,
+        birthday: this.state.project.birthday,
+        incomeType: this.state.project.incomeType,
+        taxType: this.state.project.taxType,
       }).then(res => {
         this.setState({ isSaving: false })
         this.props.history.push('/projects')
