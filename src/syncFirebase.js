@@ -6,7 +6,7 @@ import users from './store/user'
 firebase.initializeApp(config);
 
 // Get a reference to the database service
-var database = firebase.database();
+// var database = firebase.database();
 
 export function startSyncFirebaseData(){
   // var starCountRef = firebase.database().ref('projects/');

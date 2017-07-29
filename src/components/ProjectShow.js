@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 
 import _ from 'lodash';
+import firebase from 'firebase';
 import {observer} from "mobx-react";
-import projects from '../store/projects'
-import users from '../store/user'
+import projects from '../store/projects';
+import state from '../store/state';
+import users from '../store/user';
 
 @observer
 class ProjectShow extends Component {
+  constructor() {
+    super();
+
+    this.joinAsMember = this.joinAsMember.bind(this)
+    this.removeMember = this.removeMember.bind(this)
+  }
 
   render() {
     const project = _.find(projects, p => p.pid === this.props.match.params.id)
@@ -16,15 +24,6 @@ class ProjectShow extends Component {
         <div>No project found</div>
       )
     }
-
-    const members = (
-        <div>
-          <h3>募集内容</h3>
-          役割：{project.members.role}<br />
-          募集状況：{project.members.member}<br /> //同一roleのうち、memberが空じゃない／memberの数
-          ストックオプション　¥999 / 100口 //
-        </div>
-    )
 
     return (
       <div className="App">
@@ -45,7 +44,7 @@ class ProjectShow extends Component {
             {_.map(project.members || [], (member, i) => {
               return (
                 <li key={i} className="list-group-item">
-                  {this.renderMember(member)}
+                  {this.renderMember(member, i)}
                 </li>
               )
             })}
@@ -59,14 +58,27 @@ class ProjectShow extends Component {
     );
   }
 
-  renderMember(member) {
+  hasAlreadyRole() {
+    const project = _.find(projects, p => p.pid === this.props.match.params.id)
+    return !!_.find(project.members || [], member => state.currentUser && member.uid === state.currentUser.uid);
+  }
+
+  renderMember(member, key) {
     let button = '';
-    if(!member.uid)
+
+    if(!member.uid && !this.hasAlreadyRole()) {
       button = (
-        <button className="btn btn-primary">
+        <button className="btn btn-primary" onClick={(event) => this.joinAsMember(event, key)}>
           参加する
         </button>
       )
+    } else if(state.currentUser && member.uid === state.currentUser.uid){
+      button = (
+        <button className="btn btn-danger" onClick={(event) => this.removeMember(event, key)}>
+          やめる
+        </button>
+      )
+    }
 
     return (
       <div className="row">
@@ -93,7 +105,27 @@ class ProjectShow extends Component {
     )
   }
 
-  addMember() {
+  joinAsMember(event, memberIndex) {
+    event.preventDefault();
+    const project = _.find(projects, p => p.pid === this.props.match.params.id)
+    project.members[memberIndex].uid = state.currentUser.uid;
+
+    const updates = {};
+    updates['/projects/' + this.props.match.params.id] = project;
+    // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
+  }
+
+  removeMember(event, memberIndex) {
+    event.preventDefault();
+    const project = _.find(projects, p => p.pid === this.props.match.params.id)
+    project.members[memberIndex].uid = '';
+    const updates = {};
+    updates['/projects/' + this.props.match.params.id] = project;
+    // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
   }
 }
 

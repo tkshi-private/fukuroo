@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash';
 import firebase from 'firebase';
 import {observer} from "mobx-react";
+import state from '../store/state'
+import users from '../store/user'
 
 const provider = new firebase.auth.FacebookAuthProvider();
 provider.setCustomParameters({
@@ -24,6 +26,10 @@ class NavBar extends Component {
   }
 
   render() {
+    state.currentUser = _.find(users, d =>
+      d.email === this.state.currentUser.email
+    );
+
     const currentUser = this.state.currentUser ?
       <img
         className="img-circle"
@@ -69,6 +75,16 @@ class NavBar extends Component {
 
   }
 
+  getUserObject(user) {
+    const userObject = {
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+    }
+    return user;
+
+  }
+
   addIfNotExistingUser(user) {
     if(this.state.alreadyAdded) return;
 
@@ -84,11 +100,8 @@ class NavBar extends Component {
         return
       }
 
-      const userObject = {
-        name: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-      }
+      const userObject = this.getUserObject(user);
+
       console.log('Adding new user', userObject);
       const newUsersRef = firebase.database().ref("users");
       const newUserRef = newUsersRef.push(userObject);
@@ -107,8 +120,10 @@ class NavBar extends Component {
       // The signed-in user info.
       const user = result.user;
 
+      // state.currentUser = user;
       this.setState({currentUser: user})
-      this.addIfNotExistingUser(user);
+      // This will trigger in onAuthStateChanged so not needed
+      // this.addIfNotExistingUser(user);
 
     }).catch((error) => {
       // Handle Errors here.
