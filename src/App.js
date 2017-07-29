@@ -20,7 +20,7 @@ const BasicExample = () => (
       <hr/>
 
       <Route exact path="/" component={Home}/>
-      <Route path="/project" component={ProjectIndex} />
+      <Route exact path="/project" component={ProjectIndex} />
       <Route path="/project/:id" component={ProjectShow}/>
     </div>
   </Router>
