@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './ProjectIndex.css';
+import { observer } from "mobx-react";
 
+import { Link } from 'react-router-dom'
+@observer
 class ProjectIndex extends Component {
   render() {
     let image_url = 'http://kyuryou-soshiki.kanagawa-u.ac.jp/aiti/wp-content/uploads/sites/43/2015/10/sample-icon.png';
@@ -36,6 +39,9 @@ class ProjectIndex extends Component {
     return (
       <div className="App">
         <h1>プロジェクト一覧画面</h1>
+        <button>
+          <Link to="/new-project">新規プロジェクト追加</Link>
+        </button>
         <div className="list-container">
           {list}
         </div>

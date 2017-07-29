@@ -1,42 +1,38 @@
+import React, { Component } from 'react'
 import {
-  Link,
   Route,
   BrowserRouter as Router
 } from 'react-router-dom'
 
 import Home from './components/Home'
+import NavBar from './components/NavBar'
 import ProjectIndex from './components/ProjectIndex'
+import ProjectNew from './components/ProjectNew'
 import ProjectShow from './components/ProjectShow'
-import React from 'react'
 
-const BasicExample = () => (
-  <Router>
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12">
+class App extends Component {
+  render() {
+    return (
+    <Router>
+      <div className="container">
 
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/project">プロジェクト一覧</Link></li>
-          <li><Link to="/project/1">プロジェクト詳細</Link></li>
-        </ul>
+        <NavBar></NavBar>
 
-        <hr/>
+        <div className="row"></div>
+          <div className="col-sm-12">
+
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/projects" component={ProjectIndex} />
+            <Route exact path="/new-project" component={ProjectNew} />
+            <Route path="/projects/:id" component={ProjectShow}/>
+            {/* <Route path="/company/:id" component={Company}/> */}
+
+        </div>
       </div>
-    </div>
+    </Router>
+    )
+  }
 
-    <div className="row"></div>
-      <div className="col-sm-12">
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/project" component={ProjectIndex} />
-        <Route path="/project/:id" component={ProjectShow}/>
+}
 
-      </div>
-    </div>
-  </Router>
-)
-
-
-
-
-export default BasicExample
+export default App

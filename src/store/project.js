@@ -1,4 +1,8 @@
-export class Project {
-    id = Math.random();
-    @observable name = "";
+import {observable, autorun, action} from "mobx";
+
+export default class Project {
+    @observable image_url = "";
+    @observable title = "";
+    @observable abstract = "";
+    @observable valuation = "";
 }
