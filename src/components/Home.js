@@ -8,7 +8,6 @@ class Home extends Component {
     return (
       <div className="App">
         <h1>{projects[0].title}</h1>
-        <h1>{projects[0].valuation}</h1>
         <h1>ホーム</h1>
       </div>
     );

@@ -9,7 +9,6 @@ import firebaseConfig from './config/firebase';
 import registerServiceWorker from './registerServiceWorker';
 import {startSyncFirebaseData} from './syncFirebase';
 
-firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
