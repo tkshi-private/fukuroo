@@ -24,24 +24,22 @@ class App extends Component {
     return (
       <Router>
         <div className={`App container ${this.getDayOrNightClass()}`}>
-          <Switch> 
 
-            <Route exact path="/" component={Home}/>
+          <NavBar></NavBar>
 
-            <NavBar></NavBar>
+          <div className="row">
+            <div className="col-sm-12">
 
-            <div className="row">
-              <div className="col-sm-12">
+              <Route exact path="/" component={Home}/>
 
-                <Route exact path="/projects" component={ProjectIndex} />
-                <Route exact path="/new-project" component={ProjectNew} />
-                <Route path="/projects/:id" component={ProjectShow}/>
-                <Route path="/users/:id/joined" component={JoinedProjectIndex}/>
-                <Route path="/companies/:id/users" component={Employee}/>
+              <Route exact path="/projects" component={ProjectIndex} />
+              <Route exact path="/new-project" component={ProjectNew} />
+              <Route path="/projects/:id" component={ProjectShow}/>
+              <Route path="/users/:id/joined" component={JoinedProjectIndex}/>
+              <Route path="/companies/:id/users" component={Employee}/>
 
-              </div>
             </div>
-          </Switch> 
+          </div>
 
           <Clock></Clock>
         </div>
