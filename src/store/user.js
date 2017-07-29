@@ -5,4 +5,5 @@ export default class User {
     @observable name = "";
     @observable joined_pids = [];
     @observable owned_pids = [];
+    @observable introduction = "";
 }
