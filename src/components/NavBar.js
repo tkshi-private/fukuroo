@@ -81,8 +81,7 @@ class NavBar extends Component {
       email: user.email,
       photoURL: user.photoURL,
     }
-    return user;
-
+    return userObject;
   }
 
   addIfNotExistingUser(user) {
