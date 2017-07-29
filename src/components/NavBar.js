@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
+import _ from 'lodash';
 import firebase from 'firebase';
 import {observer} from "mobx-react";
 
@@ -17,6 +18,7 @@ class NavBar extends Component {
     this.state = {
       currentUser: null,
       dataFetched: false,
+      alreadyAdded: false,
     }
     this.login = this.login.bind(this);
   }
@@ -59,8 +61,37 @@ class NavBar extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({dataFetched: true, currentUser: user})
+        this.addIfNotExistingUser(user)
       }
     });
+
+  }
+
+  addIfNotExistingUser(user) {
+    if(this.state.alreadyAdded) return;
+
+    this.setState({alreadyAdded: true})
+    const usersRef = firebase.database().ref("users")
+    usersRef.on('value', (snapshot) => {
+      usersRef.off('value');
+      const users = snapshot.val()
+      const existingUser = _.find(users, u => u.email === user.email);
+
+      if(existingUser) {
+        console.log('User already exists, not adding');
+        return
+      }
+
+      const userObject = {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      }
+      console.log('Adding new user', userObject);
+      const newUsersRef = firebase.database().ref("users");
+      const newUserRef = newUsersRef.push(userObject);
+
+    })
 
   }
 
@@ -75,6 +106,7 @@ class NavBar extends Component {
       const user = result.user;
 
       this.setState({currentUser: user})
+      this.addIfNotExistingUser(user);
 
     }).catch((error) => {
       // Handle Errors here.
