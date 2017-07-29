@@ -40,7 +40,7 @@ class ProjectShow extends Component {
         </div>
         <div>
           プロジェクトオーナー：{project.owner}<br />
-          プロジェクトメンバー：{project.members}
+          {/* プロジェクトメンバー：{project.members} */}
         </div>
       </div>
     );
