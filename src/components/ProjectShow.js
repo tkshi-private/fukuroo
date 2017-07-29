@@ -39,19 +39,17 @@ class ProjectShow extends Component {
         <div>
           プロジェクトの概要：{project.abstract}
         </div>
+
         <div>
-          <ul>
+          <ul className="list-group">
             {_.map(project.members || [], (member, i) => {
               return (
-                <li key={i}>
+                <li key={i} className="list-group-item">
                   {this.renderMember(member)}
                 </li>
               )
             })}
           </ul>
-          <button className="btn btn-primary">
-            参加する
-          </button>
         </div>
         <div>
           プロジェクトオーナー：{project.owner}<br />
@@ -62,16 +60,24 @@ class ProjectShow extends Component {
   }
 
   renderMember(member) {
+    let button = '';
+    if(!member.uid)
+      button = (
+        <button className="btn btn-primary">
+          参加する
+        </button>
+      )
+
     return (
-      <div>
-        <div>
-          role: {member.role}
+      <div className="row">
+        <div className="col-xs-8">
+          {this.renderUserByUid(member.uid)}<br/>
+          ロール: {member.role}<br/>
+          持ち株比率: {member.stock_share}
         </div>
-        <div>
-          stock_share: {member.stock_share}
-        </div>
-        <div>
-          user: {this.renderUserByUid(member.uid)}
+
+        <div className="col-xs-4">
+          {button}
         </div>
       </div>
     )
@@ -80,7 +86,7 @@ class ProjectShow extends Component {
   renderUserByUid(uid) {
     const user = _.find(users, u => u.uid === uid)
 
-    if(!user) return '';
+    if(!user) return <span className="label label-success">募集中</span>;
 
     return (
       <span>{user.name}</span>
