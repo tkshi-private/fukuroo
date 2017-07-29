@@ -1,9 +1,18 @@
-import {action, autorun, observable} from "mobx";
+import { observable } from "mobx";
 
-export default class User {
+class User {
     @observable image_url = "";
     @observable name = "";
     @observable joined_pids = [];
     @observable owned_pids = [];
     @observable introduction = "";
 }
+
+
+class Users {
+    @observable users = [];
+}
+
+const users = new Users()
+
+export default users.users;
