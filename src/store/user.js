@@ -1,6 +1,6 @@
-import {observable, autorun, action} from "mobx";
+import {action, autorun, observable} from "mobx";
 
-export class User {
+export default class User {
     @observable image_url = "";
     @observable name = "";
     @observable joined_pids = [];
