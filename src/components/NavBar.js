@@ -15,12 +15,18 @@ class NavBar extends Component {
       currentUser: null,
       dataFetched: false,
     }
+    this.login = this.login.bind(this);
   }
 
   render() {
     const currentUser = this.state.currentUser ?
-      <span>ユーザー {this.state.currentUser.email}</span> :
-      <button onClick={this.login}>SignIn</button>;
+      <img
+        className="img-circle"
+        alt={this.state.currentUser.email}
+        src={this.state.currentUser.photoURL}/> :
+      <button className="btn btn-default" onClick={this.login}>
+        SignIn
+      </button>;
 
     const currentUserBlock = this.state.dataFetched ?
           <div className="row">
@@ -38,7 +44,6 @@ class NavBar extends Component {
           <ul className="list-inline">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/projects">プロジェクト一覧</Link></li>
-            <li><Link to="/projects/1">プロジェクト詳細</Link></li>
           </ul>
 
           <hr/>
@@ -47,21 +52,10 @@ class NavBar extends Component {
     )
   }
 
-  setCurrentUser(user) {
-    this.setState({
-      currentUser: {
-        displayName: user.displayName,
-        email: user.email,
-        uid: user.uid,
-      }
-    })
-  }
-
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({dataFetched: true})
-        this.setCurrentUser(user);
+        this.setState({dataFetched: true, currentUser: user})
       }
     });
 
@@ -70,24 +64,23 @@ class NavBar extends Component {
   login() {
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
-      this.setState({dataFetched: true})
       // This gives you a Facebook Access Token.
       // You can use it to access the Facebook API.
-      var token = result.credential.accessToken;
+      // var token = result.credential.accessToken;
+
       // The signed-in user info.
-      var user = result.user;
-      console.log("Signed in", user, token)
+      const user = result.user;
 
-      this.setCurrentUser(user);
+      this.setState({currentUser: user})
 
-    }).catch(function(error) {
+    }).catch((error) => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       // The email of the user's account used.
-      var email = error.email;
+      const email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      const credential = error.credential;
 
       console.error('error', errorCode, errorMessage, email, credential)
     });
