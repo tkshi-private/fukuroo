@@ -1,7 +1,17 @@
 import {action, autorun, observable} from "mobx";
-
-import Project from './project'
+import firebaseConfig from '../config/firebase'
+import firebase from 'firebase'
 import User from './user'
+
+
+class Project {
+    @observable image_url = "";
+    @observable title = "";
+    @observable abstract = "";
+    @observable valuation = "";
+    @observable members = [];
+}
+
 
 class Projects {
     @observable projects = [];
