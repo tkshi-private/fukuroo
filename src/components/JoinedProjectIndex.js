@@ -8,23 +8,23 @@ import { observer } from "mobx-react";
 import projects from '../store/projects';
 
 @observer
-class ProjectIndex extends Component {
+class JoinedProjectIndex extends Component {
   render() {
     const list = _.map(projects, (project) => {
       return (
-        <div className="list-item" key={project.pid}>
-          <div className="image-area">
-            <img src={project.image_url} alt="icon" />
+        <div className="project-container" key={project.pid}>
+          <div className="image-area-joined">
+            <img className="icon-owner" src="../../05_jolined_project_list_icon_owner.png" alt=">" />
+            <img className="image-project" src={project.image_url} alt="icon" />
           </div>
           <div className="row">
-            <div>{project.valuation}</div>
+            <div>{`¥${project.valuation}`}</div>
             <div>{project.title}</div>
-            <div>{project.abstract}</div>
+            <div>{`${project.abstract.substring(0,25)}...`}</div>
           </div>
-          <div className="valuation-area">
-            <button className="btn btn-default">
-              参加する
-            </button>
+          <div className="button-area-joined">
+            <img className="icon-image-area" src="../../05_jolined_project_list_icon_up.png" alt=">" />
+            <Link to={`/projects/${project.pid}`}><img className="icon-image-area" src="../../btn_ list_arrow.png" alt=">" /></Link>
           </div>
         </div>
       );
@@ -32,17 +32,16 @@ class ProjectIndex extends Component {
 
     return (
       <div className="App">
-        <h1>参加中のプロジェクト一覧画面</h1>
-        <button className="btn btn-default">
-          <Link to="/new-project">新規プロジェクト追加</Link>
-        </button>
-
+        <h3>参加中</h3>
         <div className="list-container">
           {list}
+        </div>
+        <div className="flex-create-project">
+          <Link to="/new-project"><img id="create-project" src="../../05_jolined_project_list_btn_add_progect.png" alt=">" /></Link>
         </div>
       </div>
     );
   }
 }
 
-export default ProjectIndex;
+export default JoinedProjectIndex;

@@ -6,34 +6,62 @@
   width: 100%;
 }
 
-.list-item {
+.project-container {
   display: flex;
   flex-direction:   row;
-  justify-content:  center;
-  align-items:      stretch;
+  justify-content:  space-between;
+  align-items:      center;
   width: 100%;
   margin-bottom: 10px;
 }
 
 .image-area {
-  width: 120px;
+  width: 60px;
 }
-.valuation-area {
-  width: 120px;
+.button-area {
+  width: 30px;
+}
+.image-area-joined {
+  width: 90px;
+}
+.button-area-joined {
+  width: 60px;
+}
+.icon-owner {
+  width: 22px;
+  height: 22px;
+}
+.image-project {
+  width: 60px;
+}
+.icon-image-area {
+  width: 22px;
+  height: 22px;
+  margin-left: auto;
+}
+.row {
+  margin: 0 10px 0 10px;
+  flex: 1;
+}
+.row-2 {
+  margin: 0 10px 0 10px;
+  flex: 2;
+}
+.row-3 {
+  margin: 0 10px 0 10px;
+  flex: 3;
 }
 img { max-width: 100% }
 
-.row {
-  margin: 0 10px 0 10px;
-  flex-grow: 1;
+.flex-create-project {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  flex-end;
+  align-items:      stretch;
 }
 
-.row-2 {
-  margin: 0 10px 0 10px;
-  flex-grow: 2;
-}
-
-.row-3 {
-  margin: 0 10px 0 10px;
-  flex-grow: 3;
+#create-project {
+  width: 90px;
+  height: 90px;
+  margin-left: auto;
 }

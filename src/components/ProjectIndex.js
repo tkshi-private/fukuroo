@@ -12,19 +12,17 @@ class ProjectIndex extends Component {
   render() {
     const list = _.map(projects, (project) => {
       return (
-        <div className="list-item" key={project.pid}>
+        <div className="project-container" key={project.pid}>
           <div className="image-area">
-            <img src={project.image_url} alt="icon" />
+            <img className="image-project" src={project.image_url} alt="icon" />
           </div>
           <div className="row">
-            <div>{project.valuation}</div>
+            <div>{`¥${project.valuation}`}</div>
             <div>{project.title}</div>
-            <div>{project.abstract}</div>
+            <div>{`${project.abstract.substring(0,25)}...`}</div>
           </div>
-          <div className="valuation-area">
-            <button className="btn btn-default">
-              <Link to={`/projects/${project.pid}`}><img src="" alt=">" /></Link>
-            </button>
+          <div className="button-area">
+            <Link to={`/projects/${project.pid}`}><img className="icon-image-area" src="../../btn_ list_arrow.png" alt=">" /></Link>
           </div>
         </div>
       );
@@ -32,11 +30,7 @@ class ProjectIndex extends Component {
 
     return (
       <div className="App">
-        <h3>プロジェクト一覧画面</h3>
-        <button className="btn btn-default">
-          <Link to="/new-project">新規プロジェクト追加</Link>
-        </button>
-
+        <h3>募集中</h3>
         <div className="list-container">
           {list}
         </div>
