@@ -1,5 +1,6 @@
+import {action, autorun, observable} from "mobx";
+
 import Project from './project'
-import {observable, autorun, action} from "mobx";
 
 class Projects {
     @observable projects = [];
