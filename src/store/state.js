@@ -1,7 +1,9 @@
 import { observable } from "mobx";
 
 class State {
-  @observable state = {}
+  @observable loginStateFetched = false;
+  @observable currentUser = null;
+  @observable currentHour = 16;
 }
 
-export default new State().state;
+export default new State();

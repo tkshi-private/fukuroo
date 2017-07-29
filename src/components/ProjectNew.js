@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import firebase from 'firebase';
 import {observer} from "mobx-react";
+import state from '../store/state';
+
+//import state from 'store/state';
 
 @observer
 class ProjectNew extends Component {
@@ -13,8 +16,16 @@ class ProjectNew extends Component {
         title: '',
         abstract: '',
         image_url: '',
-        owner_id: '',
+        owner_uid: '',
         valuation: '',
+        created_at: '',
+        category: '',
+        income: '',
+        address: '',
+        tel: '',
+        birthday: '',
+        incomeType: '',
+        taxType: '',
       },
       isSaving: false,
       files: null,
@@ -25,6 +36,14 @@ class ProjectNew extends Component {
     this.updateTitle = this.updateTitle.bind(this);
     this.updateAbstract = this.updateAbstract.bind(this);
     this.updateValuation = this.updateValuation.bind(this);
+    this.updateCreated_at = this.updateCreated_at.bind(this);
+    this.updateCategory = this.updateCategory.bind(this);
+    this.updateIncome = this.updateIncome.bind(this);
+    this.updateAddress = this.updateAddress.bind(this);
+    this.updateTel = this.updateTel.bind(this);
+    this.updateBirthday = this.updateBirthday.bind(this);
+    this.updateIncomeType = this.updateIncomeType.bind(this);
+    this.updateTaxType = this.updateTaxType.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
   }
@@ -63,19 +82,74 @@ class ProjectNew extends Component {
           </div>
 
           <div className="form-group">
-            <label>時価総額</label>
-            <input
-              type="number"
-              value={this.state.project.valuation}
-              onChange={this.updateValuation}
-              className="form-control"/>
+            <label>プロジェクトの種類</label>
+            <textarea
+              value={this.state.project.category}
+              onChange={this.updateCategory}
+              className="form-control"></textarea>
           </div>
 
           <div className="form-group">
-            <label>詳細</label>
+            <label>プロジェクトの概要</label>
             <textarea
               value={this.state.project.abstract}
               onChange={this.updateAbstract}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>プロジェクトの開始日</label>
+            <textarea
+              value={this.state.project.created_at}
+              onChange={this.updateCreated_at}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>予想年収</label>
+            <textarea
+              value={this.state.project.income}
+              onChange={this.updateIncome}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>登記場所</label>
+            <textarea
+              value={this.state.project.address}
+              onChange={this.updateAddress}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>電話番号</label>
+            <textarea
+              value={this.state.project.tel}
+              onChange={this.updateTel}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>生年月日</label>
+            <textarea
+              value={this.state.project.birthday}
+              onChange={this.updateBirthday}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>収入の種類</label>
+            <textarea
+              value={this.state.project.incomeType}
+              onChange={this.updateIncomeType}
+              className="form-control"></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>確定申告の種類</label>
+            <textarea
+              value={this.state.project.taxType}
+              onChange={this.updateTaxType}
               className="form-control"></textarea>
           </div>
 
@@ -83,7 +157,7 @@ class ProjectNew extends Component {
             className="btn btn-primary btn-block col-sm-12"
             disabled={this.state.isSaving}
             onClick={this.addProject}>
-            登録
+            この内容で登記する
           </button>
         </form>
       </div>
@@ -105,6 +179,54 @@ class ProjectNew extends Component {
   updateValuation(event) {
     const newProject = this.state.project;
     newProject.valuation = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateCreated_at(event) {
+    const newProject = this.state.project;
+    newProject.created_at = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateCategory(event) {
+    const newProject = this.state.project;
+    newProject.category = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateIncome(event) {
+    const newProject = this.state.project;
+    newProject.income = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateIncomeType(event) {
+    const newProject = this.state.project;
+    newProject.incomeType = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateAddress(event) {
+    const newProject = this.state.project;
+    newProject.address = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateTel(event) {
+    const newProject = this.state.project;
+    newProject.tel = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateBirthday(event) {
+    const newProject = this.state.project;
+    newProject.birthday = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateTaxType(event) {
+    const newProject = this.state.project;
+    newProject.taxType = event.target.value;
     this.setState({project: newProject});
   }
 
@@ -153,7 +275,16 @@ class ProjectNew extends Component {
         title: this.state.project.title,
         abstract: this.state.project.abstract,
         image_url: snapshot.downloadURL,
-        created_at: new Date(),
+        created_at: this.state.project.created_at,
+        owner: state.currentUser.uid,
+        valuation: '100000',
+        category: this.state.project.category,
+        income: this.state.project.income,
+        address: this.state.project.address,
+        tel: this.state.project.tel,
+        birthday: this.state.project.birthday,
+        incomeType: this.state.project.incomeType,
+        taxType: this.state.project.taxType,
       }).then(res => {
         this.setState({ isSaving: false })
         this.props.history.push('/projects')
