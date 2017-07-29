@@ -12,26 +12,38 @@ class NavBar extends Component {
   constructor() {
     super();
     this.state = {
-      currentUser: null
+      currentUser: null,
+      dataFetched: false,
     }
+    this.login = this.login.bind(this);
   }
 
   render() {
     const currentUser = this.state.currentUser ?
-      (<span>ユーザー {this.state.currentUser.email}</span>) :
-      (<button onClick={this.login}>SignIn</button>);
+      <img
+        className="img-circle"
+        alt={this.state.currentUser.email}
+        src={this.state.currentUser.photoURL}/> :
+      <button className="btn btn-default" onClick={this.login}>
+        SignIn
+      </button>;
+
+    const currentUserBlock = this.state.dataFetched ?
+          <div className="row">
+            <div className="col-sm-12 text-right">
+              {currentUser}
+            </div>
+          </div> : "";
+
     return (
       <div className="row">
         <div className="col-sm-12">
           
-          <div className="pull-right">
-            {currentUser}
-          </div>
+          {currentUserBlock}
 
           <ul className="list-inline">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/projects">プロジェクト一覧</Link></li>
-            <li><Link to="/projects/1">プロジェクト詳細</Link></li>
           </ul>
 
           <hr/>
@@ -40,53 +52,40 @@ class NavBar extends Component {
     )
   }
 
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({dataFetched: true, currentUser: user})
+      }
+    });
+
+  }
+
   login() {
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      var token = result.credential.accessToken;
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      // This gives you a Facebook Access Token.
+      // You can use it to access the Facebook API.
+      // var token = result.credential.accessToken;
+
       // The signed-in user info.
-      var user = result.user;
+      const user = result.user;
 
-      this.setState({
-        currentUser: {
-          displayName: user.displayName,
-          email: user.email,
-          uid: user.uid,
-        }
-      })
-      console.log('Signed in as', token, user)
+      this.setState({currentUser: user})
 
-    }).catch(function(error) {
+    }).catch((error) => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       // The email of the user's account used.
-      var email = error.email;
+      const email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      const credential = error.credential;
 
       console.error('error', errorCode, errorMessage, email, credential)
     });
   }
 
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-
-        // User is signed in.
-
-        this.setState({
-          currentUser: {
-            displayName: user.displayName,
-            email: user.email,
-            uid: user.uid,
-          }
-        });
-
-      }
-    });
-
-  }
 }
 
 export default NavBar

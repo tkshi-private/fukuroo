@@ -7,6 +7,7 @@ import {
 import Home from './components/Home'
 import NavBar from './components/NavBar'
 import ProjectIndex from './components/ProjectIndex'
+import ProjectNew from './components/ProjectNew'
 import ProjectShow from './components/ProjectShow'
 
 class App extends Component {
@@ -22,7 +23,9 @@ class App extends Component {
 
             <Route exact path="/" component={Home}/>
             <Route exact path="/projects" component={ProjectIndex} />
+            <Route exact path="/new-project" component={ProjectNew} />
             <Route path="/projects/:id" component={ProjectShow}/>
+            {/* <Route path="/company/:id" component={Company}/> */}
 
         </div>
       </div>
