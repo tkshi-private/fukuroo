@@ -62,6 +62,8 @@ class NavBar extends Component {
       if (user) {
         this.setState({dataFetched: true, currentUser: user})
         this.addIfNotExistingUser(user)
+      } else {
+        this.setState({dataFetched: true, currentUser: null})
       }
     });
 
