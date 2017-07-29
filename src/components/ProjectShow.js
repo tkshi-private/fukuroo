@@ -82,16 +82,31 @@ class ProjectShow extends Component {
 
     return (
       <div className="row">
-        <div className="col-xs-8">
+        <div className="col-xs-3">
+          {this.renderUserImage(member.uid)}
+        </div>
+        <div className="col-xs-6">
           {this.renderUserByUid(member.uid)}<br/>
           ロール: {member.role}<br/>
           持ち株比率: {member.stock_share}
         </div>
 
-        <div className="col-xs-4">
+        <div className="col-xs-3">
           {button}
         </div>
       </div>
+    )
+  }
+
+  renderUserImage(uid) {
+    const user = _.find(users, u => u.uid === uid)
+
+    if(!user) return ''
+
+    return (
+      <img className="img-rounded"
+        src={user.photoURL}
+        alt="none"/>
     )
   }
 
