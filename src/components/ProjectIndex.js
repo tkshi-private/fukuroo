@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class ProjectIndex extends Component {
   render() {
@@ -12,4 +10,4 @@ class ProjectIndex extends Component {
   }
 }
 
-export default App;
+export default ProjectIndex;

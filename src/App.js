@@ -1,16 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import ProjectIndex from './components/ProjectIndex'
+import ProjectShow from './components/ProjectShow'
+import Home from './components/Home'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>Hataraco!!</h1>
-        <img src="./mig.jpeg" ></img>
-      </div>
-    );
-  }
-}
+const BasicExample = () => (
+  <Router>
+    <div>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/project">プロジェクト一覧</Link></li>
+        <li><Link to="/project/1">プロジェクト詳細</Link></li>
+      </ul>
 
-export default App;
+      <hr/>
+
+      <Route exact path="/" component={Home}/>
+      <Route path="/project" component={ProjectIndex} />
+      <Route path="/project/:id" component={ProjectShow}/>
+    </div>
+  </Router>
+)
+
+
+
+
+export default BasicExample
