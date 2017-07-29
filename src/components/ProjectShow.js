@@ -23,12 +23,12 @@ class ProjectShow extends Component {
         </div>
         <div>
           プロジェクトオーナー：{project.owner}<br />
-          プロジェクトメンバー：{project.members[]}
+          プロジェクトメンバー：//{project.members[]}
         </div>
         <div>
           <h3>募集内容</h3>
-          役割：{project.members[].role}<br />
-          募集状況：{project.members[].member}<br /> //同一roleのうち、memberが空じゃない／memberの数
+          役割：//{project.members[].role}<br />
+          募集状況：//{project.members[].member}<br /> //同一roleのうち、memberが空じゃない／memberの数
           ストックオプション　¥999 / 100口 //
         </div>
       </div>
