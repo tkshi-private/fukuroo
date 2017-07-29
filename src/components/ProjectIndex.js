@@ -23,7 +23,7 @@ class ProjectIndex extends Component {
           </div>
           <div className="valuation-area">
             <button className="btn btn-default">
-              <Link to={`/projects/${pid}`}><img src="" alt=">" /></Link>
+              <Link to={`/projects/${project.key}`}><img src="" alt=">" /></Link>
             </button>
           </div>
         </div>
