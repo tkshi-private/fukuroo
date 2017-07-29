@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import projects from '../store/projects'
+
 import {observer} from "mobx-react";
+import projects from '../store/projects';
 
 @observer
 class Home extends Component {
