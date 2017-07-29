@@ -18,9 +18,16 @@ setInterval(()=>{
   project.valuation = project.valuation + 1
 })
 
-
 projects.projects.push(
   project
 )
+
+const anotherProject = new Project()
+project.image_url = 'http://kyuryou-soshiki.kanagawa-u.ac.jp/aiti/wp-content/uploads/sites/43/2015/10/sample-icon.png';
+project.title = 'みんなで起業！';
+project.abstract = '日本にイノベーションを起こすために、新しい事業を創発しましょう。';
+project.valuation = 1000;
+
+projects.projects.push(anotherProject)
 
 export default projects.projects
