@@ -12,21 +12,28 @@ class NavBar extends Component {
   constructor() {
     super();
     this.state = {
-      currentUser: null
+      currentUser: null,
+      dataFetched: false,
     }
   }
 
   render() {
     const currentUser = this.state.currentUser ?
-      (<span>ユーザー {this.state.currentUser.email}</span>) :
-      (<button onClick={this.login}>SignIn</button>);
+      <span>ユーザー {this.state.currentUser.email}</span> :
+      <button onClick={this.login}>SignIn</button>;
+
+    const currentUserBlock = this.state.dataFetched ?
+          <div className="row">
+            <div className="col-sm-12 text-right">
+              {currentUser}
+            </div>
+          </div> : "";
+
     return (
       <div className="row">
         <div className="col-sm-12">
           
-          <div className="pull-right">
-            {currentUser}
-          </div>
+          {currentUserBlock}
 
           <ul className="list-inline">
             <li><Link to="/">Home</Link></li>
@@ -40,21 +47,38 @@ class NavBar extends Component {
     )
   }
 
+  setCurrentUser(user) {
+    this.setState({
+      currentUser: {
+        displayName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+      }
+    })
+  }
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({dataFetched: true})
+        this.setCurrentUser(user);
+      }
+    });
+
+  }
+
   login() {
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      this.setState({dataFetched: true})
+      // This gives you a Facebook Access Token.
+      // You can use it to access the Facebook API.
       var token = result.credential.accessToken;
       // The signed-in user info.
       var user = result.user;
+      console.log("Signed in", user, token)
 
-      this.setState({
-        currentUser: {
-          displayName: user.displayName,
-          email: user.email,
-          uid: user.uid,
-        }
-      })
-      console.log('Signed in as', token, user)
+      this.setCurrentUser(user);
 
     }).catch(function(error) {
       // Handle Errors here.
@@ -69,24 +93,6 @@ class NavBar extends Component {
     });
   }
 
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-
-        // User is signed in.
-
-        this.setState({
-          currentUser: {
-            displayName: user.displayName,
-            email: user.email,
-            uid: user.uid,
-          }
-        });
-
-      }
-    });
-
-  }
 }
 
 export default NavBar
