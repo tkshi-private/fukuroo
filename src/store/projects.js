@@ -15,10 +15,6 @@ project.title = "ハタラコ！！";
 project.abstract = "働け！";
 project.valuation = 100;
 
-setInterval(()=>{
-  project.valuation = project.valuation + 1
-})
-
 projects.projects.push(
   project
 )
