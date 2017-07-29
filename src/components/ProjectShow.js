@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {observer} from "mobx-react";
 import projects from '../store/project'
 
+@observer
 class ProjectShow extends Component {
   render() {
     return (
