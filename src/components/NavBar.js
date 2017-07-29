@@ -32,10 +32,12 @@ class NavBar extends Component {
     const currentUserBlock = 
       <div className="row">
         <div className="col-xs-4 col-xs-offset-8 text-right">
+          <Link to={`/users/${state.currentUser.uid}/joined`}>
           <img
             className="img-circle"
             alt={userObject.email}
             src={userObject.photoURL}/>
+          </Link>
         </div>
       </div>;
 
