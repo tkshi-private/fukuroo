@@ -13,48 +13,19 @@ import users from '../store/user';
 @observer
 class JoinedProjectIndex extends Component {
   renderUserInfo() {
-    const user = firebase.auth().currentUser;
-    if(user){
-      const name = this.renderUserName(user.email);
-      return (
-        <div className="user-info">
-          <img className="img-circle" src={user.photoURL} />
-          <div>{name}</div>
-        </div>
-      );
-    } else return '';
+    return (
+      <div className="user-info">
+        <img className="img-circle" src={state.currentUser.photoURL} />
+        <div>{state.currentUser.displayName}</div>
+      </div>
+    );
   }
-
-  renderUserName(email) {
-    const usersRef = firebase.database().ref("users")
-    let name;
-    //usersRef.equalTo(email).on('value', (snapshot) => {
-    usersRef.on('value', (snapshot) => {
-      const users = snapshot.val()
-      const user = _.find(users, u => u.email === email);
-      name = user.name;
-      console.log(user.name);
-    })
-    return name;
-    //console.log(user.name);
-    /*
-    usersRef.on('value', (snapshot) => {
-      usersRef.off('value');
-      const users = snapshot.val()
-      console.log(users);
-      const exist = _.find(users, u => u.email === email);
-      if(exist){
-        user = exist.name;
-        //console.log(user);
-        return
-      }
-    })
-    console.log(user);
-    return 'a';//user.name;
-    */
-  }
+  //-KqCnu38CyFFsBpYGXVv
 
   render() {
+    if(!state.loginStateFetched) {
+      return <div></div>
+    }
     const list = _.map(projects, (project) => {
       return (
         <div className="project-container" key={project.pid}>

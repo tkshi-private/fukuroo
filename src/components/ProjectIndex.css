@@ -1,16 +1,18 @@
 .user-info {
   display: flex;
   flex-direction:   row;
-  justify-content:  space-between;
+  justify-content:  flex-start;
   align-items:      center;
   width: 100%;
   padding: 10px 0 10px 0;
+  font-size: 14pt;
   color: black;
   background-color: white;
 }
 .user-info img {
   width: 80px;
   height: 80px;
+  margin: 0 10px 0 10px;
 }
 
 .list-container {
@@ -45,6 +47,7 @@
 .icon-owner {
   width: 22px;
   height: 22px;
+  margin-right: 8px;
 }
 .image-project {
   width: 60px;
