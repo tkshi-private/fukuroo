@@ -12,7 +12,7 @@ class Home extends Component {
     if(!state.currentUser) {
       return (
         <div className="App">
-          <h1>FUKUROO</h1>
+          <img src="/03_2_login_bg.png"/>
 
           <LoginButton></LoginButton>
         </div>
@@ -21,7 +21,6 @@ class Home extends Component {
 
     return (
       <div className="App">
-        <h1>FUKUROO</h1>
 
         {this.renderWorkOrWake()}
 
@@ -32,21 +31,20 @@ class Home extends Component {
   renderWorkOrWake() {
     if(state.currentHour >= 9 && state.currentHour < 17) {
       return (
-        <Link to='/projects'>
-          <button className="btn btn-danger btn-block" disabled>
-            WORK
-          </button>
-        </Link>
+        <div>
+          <img src="/01_top_logo_daytime.png" />
+        </div>
       )
       
     } else {
 
       return (
-        <Link to='/projects'>
-          <button className="btn btn-success btn-block">
-            WAKE
-          </button>
-        </Link>
+        <div>
+          <img src="/01_top_logo.png" />
+          <Link to='/projects'>
+            <img src="/01_top_btn_wake.png" />
+          </Link>
+        </div>
       )
     }
 
