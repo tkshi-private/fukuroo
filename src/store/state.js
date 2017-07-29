@@ -1,7 +1,9 @@
 import { observable } from "mobx";
 
 class State {
-  @observable state = {}
+  @observable state = {
+    loginStateFetched: false
+  }
 }
 
 export default new State().state;

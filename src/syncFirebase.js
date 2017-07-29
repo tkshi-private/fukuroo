@@ -2,6 +2,7 @@ import _ from 'lodash';
 import config from './config/firebase'
 import firebase from 'firebase'
 import projects from './store/projects'
+import state from './store/state'
 import users from './store/user'
 firebase.initializeApp(config);
 
@@ -9,10 +10,49 @@ firebase.initializeApp(config);
 // var database = firebase.database();
 
 export function startSyncFirebaseData(){
-  // var starCountRef = firebase.database().ref('projects/');
-  // starCountRef.on('value', function(snapshot) {
-  //   projects.push(snapshot.val()['-KqCBf092NKmFktgywPp'])
-  // });
+  // login related stuff
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      addIfNotExistingUser(user)
+      state.currentUser = user;
+    } else {
+      state.currentUser = null;
+    }
+    state.loginStateFetched = true;
+  });
+
+  function getUserObject(user) {
+    const userObject = {
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+    }
+    return userObject;
+  }
+
+  function addIfNotExistingUser(user) {
+    if(state.currentUser) return;
+
+    const usersRef = firebase.database().ref("users")
+    usersRef.on('value', (snapshot) => {
+      usersRef.off('value');
+      const users = snapshot.val()
+      const existingUser = _.find(users, u => u.email === user.email);
+
+      if(existingUser) {
+        console.log('User already exists, not adding');
+        return
+      }
+
+      const userObject = getUserObject(user);
+
+      console.log('Adding new user', userObject);
+      const newUsersRef = firebase.database().ref("users");
+      const newUserRef = newUsersRef.push(userObject);
+
+    })
+  }
+
 
   // sync projects
   const projectsRef = firebase.database().ref('projects');
@@ -26,14 +66,14 @@ export function startSyncFirebaseData(){
   // })
 
   projectsRef.on('child_added', (data) => {
-    console.log('added', data.val())
+    // console.log('added', data.val())
     const newProject = data.val();
     newProject.pid = data.key;
     projects.push(newProject);
   });
 
   projectsRef.on('child_changed', (data) => {
-    console.log('changed', data.val())
+    // console.log('changed', data.val())
     const newProject = data.val();
     newProject.pid = data.key;
     const index = _.findIndex(projects, p => p.pid === data.key)
@@ -41,7 +81,7 @@ export function startSyncFirebaseData(){
   });
 
   projectsRef.on('child_removed', (data) => {
-    console.log('removed', data.val())
+    // console.log('removed', data.val())
     const index = _.findIndex(projects, p => p.pid === data.key)
     projects.splice(index, 1)
   });
@@ -55,7 +95,7 @@ export function startSyncFirebaseData(){
   });
 
   usersRef.on('child_changed', (data) => {
-    console.log('changed', data.val())
+    // console.log('changed', data.val())
     const newUser = data.val();
     newUser.pid = data.key;
     const index = _.findIndex(users, p => p.uid === data.key)
@@ -63,7 +103,7 @@ export function startSyncFirebaseData(){
   });
 
   usersRef.on('child_removed', (data) => {
-    console.log('removed', data.val())
+    // console.log('removed', data.val())
     const index = _.findIndex(users, p => p.uid === data.key)
     users.splice(index, 1)
   });

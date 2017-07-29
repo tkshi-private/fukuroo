@@ -9,4 +9,4 @@ import {startSyncFirebaseData} from './syncFirebase';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
-startSyncFirebaseData()
+startSyncFirebaseData();

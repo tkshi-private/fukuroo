@@ -17,34 +17,40 @@ provider.setCustomParameters({
 class NavBar extends Component {
   constructor() {
     super();
-    this.state = {
-      currentUser: null,
-      dataFetched: false,
-      alreadyAdded: false,
-    }
+
     this.login = this.login.bind(this);
   }
 
   render() {
-    state.currentUser = _.find(users, d =>
-      d.email === this.state.currentUser.email
+    if(!state.loginStateFetched) {
+      return <div></div>
+    }
+
+    if(!state.currentUser) {
+      return (
+        <button className="btn btn-default" onClick={this.login}>
+          SignIn
+        </button>
+      )
+    }
+
+    let userObject = _.find(users, d =>
+      d.email === state.currentUser.email
     );
 
-    const currentUser = this.state.currentUser ?
-      <img
-        className="img-circle"
-        alt={this.state.currentUser.email}
-        src={this.state.currentUser.photoURL}/> :
-      <button className="btn btn-default" onClick={this.login}>
-        SignIn
-      </button>;
+    if(!userObject) {
+      userObject = state.currentUser;
+    }
 
-    const currentUserBlock = this.state.dataFetched ?
-          <div className="row">
-            <div className="col-sm-12 text-right">
-              {currentUser}
-            </div>
-          </div> : "";
+    const currentUserBlock = 
+      <div className="row">
+        <div className="col-xs-4 col-xs-offset-8 text-right">
+          <img
+            className="img-circle"
+            alt={userObject.email}
+            src={userObject.photoURL}/>
+        </div>
+      </div>;
 
     return (
       <div className="row">
@@ -63,52 +69,6 @@ class NavBar extends Component {
     )
   }
 
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({dataFetched: true, currentUser: user})
-        this.addIfNotExistingUser(user)
-      } else {
-        this.setState({dataFetched: true, currentUser: null})
-      }
-    });
-
-  }
-
-  getUserObject(user) {
-    const userObject = {
-      name: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-    }
-    return userObject;
-  }
-
-  addIfNotExistingUser(user) {
-    if(this.state.alreadyAdded) return;
-
-    this.setState({alreadyAdded: true})
-    const usersRef = firebase.database().ref("users")
-    usersRef.on('value', (snapshot) => {
-      usersRef.off('value');
-      const users = snapshot.val()
-      const existingUser = _.find(users, u => u.email === user.email);
-
-      if(existingUser) {
-        console.log('User already exists, not adding');
-        return
-      }
-
-      const userObject = this.getUserObject(user);
-
-      console.log('Adding new user', userObject);
-      const newUsersRef = firebase.database().ref("users");
-      const newUserRef = newUsersRef.push(userObject);
-
-    })
-
-  }
-
   login() {
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
@@ -119,8 +79,10 @@ class NavBar extends Component {
       // The signed-in user info.
       const user = result.user;
 
-      // state.currentUser = user;
-      this.setState({currentUser: user})
+      state.currentUser = user;
+      console.log('logged in as', user)
+      // this.setState({currentUser: user})
+
       // This will trigger in onAuthStateChanged so not needed
       // this.addIfNotExistingUser(user);
 
