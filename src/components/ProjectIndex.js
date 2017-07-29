@@ -30,7 +30,6 @@ class ProjectIndex extends Component {
 
     return (
       <div className="App">
-        <h3>募集中</h3>
         <div className="list-container">
           {list}
         </div>

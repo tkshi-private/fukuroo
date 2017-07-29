@@ -4,11 +4,56 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom'
 import _ from 'lodash';
+import firebase from 'firebase';
 import { observer } from "mobx-react";
 import projects from '../store/projects';
+import state from '../store/state';
+import users from '../store/user';
 
 @observer
 class JoinedProjectIndex extends Component {
+  renderUserInfo() {
+    const user = firebase.auth().currentUser;
+    if(user){
+      const name = this.renderUserName(user.email);
+      return (
+        <div className="user-info">
+          <img className="img-circle" src={user.photoURL} />
+          <div>{name}</div>
+        </div>
+      );
+    } else return '';
+  }
+
+  renderUserName(email) {
+    const usersRef = firebase.database().ref("users")
+    let name;
+    //usersRef.equalTo(email).on('value', (snapshot) => {
+    usersRef.on('value', (snapshot) => {
+      const users = snapshot.val()
+      const user = _.find(users, u => u.email === email);
+      name = user.name;
+      console.log(user.name);
+    })
+    return name;
+    //console.log(user.name);
+    /*
+    usersRef.on('value', (snapshot) => {
+      usersRef.off('value');
+      const users = snapshot.val()
+      console.log(users);
+      const exist = _.find(users, u => u.email === email);
+      if(exist){
+        user = exist.name;
+        //console.log(user);
+        return
+      }
+    })
+    console.log(user);
+    return 'a';//user.name;
+    */
+  }
+
   render() {
     const list = _.map(projects, (project) => {
       return (
@@ -32,7 +77,7 @@ class JoinedProjectIndex extends Component {
 
     return (
       <div className="App">
-        <h3>参加中</h3>
+        { this.renderUserInfo() }
         <div className="list-container">
           {list}
         </div>
