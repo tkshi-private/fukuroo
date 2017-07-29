@@ -1,12 +1,13 @@
-import React from 'react'
+import {
+  Link,
+  Route,
+  BrowserRouter as Router
+} from 'react-router-dom'
+
+import Home from './components/Home'
 import ProjectIndex from './components/ProjectIndex'
 import ProjectShow from './components/ProjectShow'
-import Home from './components/Home'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import React from 'react'
 
 const BasicExample = () => (
   <Router>
@@ -20,7 +21,7 @@ const BasicExample = () => (
       <hr/>
 
       <Route exact path="/" component={Home}/>
-      <Route path="/project" component={ProjectIndex} />
+      <Route exact path="/project" component={ProjectIndex} />
       <Route path="/project/:id" component={ProjectShow}/>
     </div>
   </Router>
