@@ -51,6 +51,7 @@ class NavBar extends Component {
         currentUser: {
           displayName: user.displayName,
           email: user.email,
+          uid: user.uid,
         }
       })
       console.log('Signed in as', token, user)
@@ -73,12 +74,12 @@ class NavBar extends Component {
       if (user) {
 
         // User is signed in.
-        console.log('aaa', user)
 
         this.setState({
           currentUser: {
             displayName: user.displayName,
             email: user.email,
+            uid: user.uid,
           }
         });
 
