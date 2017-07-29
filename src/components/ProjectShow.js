@@ -8,7 +8,7 @@ import projects from '../store/projects'
 class ProjectShow extends Component {
 
   render() {
-    const project = _.find(projects, p => p.pid === parseInt(this.props.match.params.id))
+    const project = _.find(projects, p => p.pid === this.props.match.params.id)
 
     if(!project) {
       return (

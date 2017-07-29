@@ -17,6 +17,7 @@ class ProjectIndex extends Component {
             <img src={project.image_url} alt="icon" />
           </div>
           <div className="row">
+            <Link to={`/projects/${project.pid}`}>{project.pid}</Link>
             <div>{project.valuation}</div>
             <div>{project.title}</div>
             <div>{project.abstract}</div>
