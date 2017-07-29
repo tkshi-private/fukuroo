@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import projects from '../store/project'
 
 class ProjectShow extends Component {
   render() {
@@ -6,27 +7,27 @@ class ProjectShow extends Component {
       <div className="App">
         <h1>プロジェクト詳細画面</h1>
         <div>
-          プロジェクトタイトル<br />
-          プロジェクトの日付
+          プロジェクトタイトル：{project.title}<br />
+          プロジェクトの日付：{project.created_at}
         </div>
         <div>
-          プロジェクトイメージ
+          プロジェクトイメージ：{project.image_url}
         </div>
         <div>
-          プロジェクトの時価評価額
+          プロジェクトの時価評価額：{project.valuation}
         </div>
         <div>
-          プロジェクトの概要
+          プロジェクトの概要：{project.abstract}
         </div>
         <div>
-          プロジェクトオーナー<br />
-          プロジェクトメンバー
+          プロジェクトオーナー：{project.owner}<br />
+          プロジェクトメンバー：{project.members[]}
         </div>
         <div>
           <h3>募集内容</h3>
-          役割<br />
-          募集状況<br />
-          ストックオプション　¥999 / 100口
+          役割：{project.members[].role}<br />
+          募集状況：{project.members[].member}<br /> //同一roleのうち、memberが空じゃない／memberの数
+          ストックオプション　¥999 / 100口 //
         </div>
       </div>
     );
