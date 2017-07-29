@@ -9,7 +9,6 @@ import state from '../store/state'
 @observer
 class Home extends Component {
   render() {
-    console.log(state.currentUser)
     if(!state.currentUser) {
       return (
         <div className="App">
@@ -19,7 +18,6 @@ class Home extends Component {
         </div>
       )
     }
-    console.log('rendering')
 
     return (
       <div className="App">
