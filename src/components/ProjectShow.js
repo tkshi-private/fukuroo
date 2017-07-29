@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import {observer} from "mobx-react";
 import projects from '../store/projects'
+import users from '../store/user'
 
 @observer
 class ProjectShow extends Component {
@@ -39,11 +40,54 @@ class ProjectShow extends Component {
           プロジェクトの概要：{project.abstract}
         </div>
         <div>
+          <ul>
+            {_.map(project.members || [], (member, i) => {
+              return (
+                <li key={i}>
+                  {this.renderMember(member)}
+                </li>
+              )
+            })}
+          </ul>
+          <button className="btn btn-primary">
+            参加する
+          </button>
+        </div>
+        <div>
           プロジェクトオーナー：{project.owner}<br />
-          {/* プロジェクトメンバー：{project.members} */}
+          {/* プロジェクトメンバー：{project.members}  */}
         </div>
       </div>
     );
+  }
+
+  renderMember(member) {
+    return (
+      <div>
+        <div>
+          role: {member.role}
+        </div>
+        <div>
+          stock_share: {member.stock_share}
+        </div>
+        <div>
+          user: {this.renderUserByUid(member.uid)}
+        </div>
+      </div>
+    )
+  }
+
+  renderUserByUid(uid) {
+    const user = _.find(users, u => u.uid === uid)
+
+    if(!user) return '';
+
+    return (
+      <span>{user.name}</span>
+    )
+  }
+
+  addMember() {
   }
 }
 
