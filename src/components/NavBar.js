@@ -7,7 +7,7 @@ import {observer} from "mobx-react";
 
 const provider = new firebase.auth.FacebookAuthProvider();
 provider.setCustomParameters({
-  'display': 'popover'
+  'display': 'popup'
 });
 
 
