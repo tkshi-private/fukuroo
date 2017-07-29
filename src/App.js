@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    var ref = firebase.database().ref("users")
+    var ref = firebase.database().ref("projects")
     var userId = firebase.auth().currentUser;
     ref.on('value', (snapshot) => {
       console.log(snapshot.val());
