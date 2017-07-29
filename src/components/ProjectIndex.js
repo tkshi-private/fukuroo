@@ -12,7 +12,7 @@ class ProjectIndex extends Component {
   render() {
     const list = _.map(projects, (project) => {
       return (
-        <div className="list-item" key={project.title}>
+        <div className="list-item" key={project.pid}>
           <div className="image-area">
             <img src={project.image_url} alt="icon" />
           </div>
