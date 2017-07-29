@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
 import firebase from 'firebase';
+import {observer} from "mobx-react";
 
 const provider = new firebase.auth.FacebookAuthProvider();
 provider.setCustomParameters({
   'display': 'iframe'
 });
 
+
+@observer
 class NavBar extends Component {
   constructor() {
     super();
@@ -38,7 +41,7 @@ class NavBar extends Component {
     return (
       <div className="row">
         <div className="col-sm-12">
-          
+
           {currentUserBlock}
 
           <ul className="list-inline">

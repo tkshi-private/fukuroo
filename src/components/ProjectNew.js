@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-
+import {observer} from "mobx-react";
 import firebase from 'firebase';
 
+@observer
 class ProjectNew extends Component {
   constructor() {
     super()
