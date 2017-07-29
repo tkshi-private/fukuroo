@@ -27,9 +27,9 @@ class LoginButton extends Component {
 
     if(!state.currentUser) {
       return (
-        <button className="btn btn-default" onClick={this.login}>
-          SignIn
-        </button>
+        <div onClick={this.login}>
+          <img src="/03_2_login_btn_login.png" alt="ログイン"/>
+        </div>
       )
     }
 
