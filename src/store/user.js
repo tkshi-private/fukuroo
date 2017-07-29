@@ -1,4 +1,3 @@
 export class User {
-    id = Math.random();
-    @observable name = "";
+    @observable image_url = "";
 }
