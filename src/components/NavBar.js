@@ -5,13 +5,13 @@ import LoginButton from './LoginButton'
 import _ from 'lodash';
 import firebase from 'firebase';
 import {observer} from "mobx-react";
-import state from '../store/state'
-import users from '../store/user'
+import state from '../store/state';
+import users from '../store/user';
 
 @observer
 class NavBar extends Component {
   render() {
-    if(!state.loginStateFetched) {
+    if(!state.loginStateFetched || state.hideNavBar) {
       return <div></div>
     }
 
@@ -54,6 +54,11 @@ class NavBar extends Component {
         </div>
       </div>
     )
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      // navigated!
+    }
   }
 }
 

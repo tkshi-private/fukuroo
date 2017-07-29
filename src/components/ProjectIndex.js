@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash';
 import { observer } from "mobx-react";
 import projects from '../store/projects';
+import state from '../store/state'
 
 @observer
 class ProjectIndex extends Component {
@@ -35,6 +36,14 @@ class ProjectIndex extends Component {
         </div>
       </div>
     );
+  }
+
+  componentWillMount() {
+    if(this.props.location.pathname === '/') {
+      state.hideNavbar = true;
+    } else {
+      state.hideNavbar = false;
+    }
   }
 }
 

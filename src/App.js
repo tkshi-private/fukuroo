@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import {
   Route,
   BrowserRouter as Router,
-  Switch
 } from 'react-router-dom'
 
 import Clock from './components/Clock'
@@ -15,8 +14,16 @@ import NavBar from './components/NavBar'
 import ProjectIndex from './components/ProjectIndex'
 import ProjectNew from './components/ProjectNew'
 import ProjectShow from './components/ProjectShow'
+// import createHistory from 'history/createBrowserHistory';
 import {observer} from "mobx-react";
 import state from './store/state';
+
+// const history = createHistory();
+
+// const ChangeTracker = withRouter(({match, location, history}) => {
+//   console.log(match, location.pathname, location.state);
+//   return false;
+// });
 
 @observer
 class App extends Component {
@@ -25,7 +32,7 @@ class App extends Component {
       <Router>
         <div className={`App container ${this.getDayOrNightClass()}`}>
 
-          <NavBar></NavBar>
+          {this.renderNavbar()}
 
           <div className="row">
             <div className="col-sm-12">
@@ -45,6 +52,13 @@ class App extends Component {
         </div>
       </Router>
     )
+  }
+
+  renderNavbar() {
+    if(state.hideNavbar) {
+      return <div></div>;
+    }
+    return <NavBar></NavBar>;
   }
 
   getDayOrNightClass() {
