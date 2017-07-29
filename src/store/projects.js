@@ -1,8 +1,4 @@
-import {action, autorun, observable} from "mobx";
-
-import User from './user'
-import firebase from 'firebase'
-import firebaseConfig from '../config/firebase'
+import { observable } from "mobx";
 
 class Project {
     @observable image_url = "";

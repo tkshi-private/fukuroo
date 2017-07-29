@@ -10,6 +10,7 @@ import ProjectIndex from './components/ProjectIndex'
 import ProjectNew from './components/ProjectNew'
 import ProjectShow from './components/ProjectShow'
 import JoinedProjectIndex from './components/JoinedProjectIndex'
+import Employee from './components/Employee'
 
 class App extends Component {
   render() {
@@ -27,7 +28,7 @@ class App extends Component {
             <Route exact path="/new-project" component={ProjectNew} />
             <Route path="/projects/:id" component={ProjectShow}/>
             <Route path="/users/:id/joined" component={JoinedProjectIndex}/>
-            {/* <Route path="/company/:id" component={Company}/> */}
+            <Route path="/companies/:id/users" component={Employee}/>
 
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {observer} from "mobx-react";
+
 import firebase from 'firebase';
+import {observer} from "mobx-react";
 
 @observer
 class ProjectNew extends Component {
@@ -10,9 +11,10 @@ class ProjectNew extends Component {
     this.state = {
       project: {
         title: '',
-        description: '',
+        abstract: '',
         image_url: '',
         owner_id: '',
+        valuation: '',
       },
       isSaving: false,
       files: null,
@@ -21,7 +23,8 @@ class ProjectNew extends Component {
 
     this.addProject = this.addProject.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
-    this.updateDescription = this.updateDescription.bind(this);
+    this.updateAbstract = this.updateAbstract.bind(this);
+    this.updateValuation = this.updateValuation.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
   }
@@ -60,10 +63,19 @@ class ProjectNew extends Component {
           </div>
 
           <div className="form-group">
+            <label>時価総額</label>
+            <input
+              type="number"
+              value={this.state.project.valuation}
+              onChange={this.updateValuation}
+              className="form-control"/>
+          </div>
+
+          <div className="form-group">
             <label>詳細</label>
             <textarea
-              value={this.state.project.description}
-              onChange={this.updateDescription}
+              value={this.state.project.abstract}
+              onChange={this.updateAbstract}
               className="form-control"></textarea>
           </div>
 
@@ -84,9 +96,15 @@ class ProjectNew extends Component {
     this.setState({project: newProject});
   }
 
-  updateDescription(event) {
+  updateAbstract(event) {
     const newProject = this.state.project;
-    newProject.description = event.target.value;
+    newProject.abstract = event.target.value;
+    this.setState({project: newProject});
+  }
+
+  updateValuation(event) {
+    const newProject = this.state.project;
+    newProject.valuation = event.target.value;
     this.setState({project: newProject});
   }
 
@@ -133,7 +151,7 @@ class ProjectNew extends Component {
       const projectRef = firebase.database().ref("projects")
       const newProjectRef = projectRef.push({
         title: this.state.project.title,
-        description: this.state.project.description,
+        abstract: this.state.project.abstract,
         image_url: snapshot.downloadURL,
         created_at: new Date(),
       }).then(res => {

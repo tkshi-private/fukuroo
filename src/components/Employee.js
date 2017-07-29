@@ -4,14 +4,14 @@ import {observer} from "mobx-react";
 import projects from '../store/projects';
 
 @observer
-class Home extends Component {
+class Employee extends Component {
   render() {
     return (
       <div className="App">
-        <h1>ホーム</h1>
+        <h1>あなたの会社の社員一覧</h1>
       </div>
     );
   }
 }
 
-export default Home;
+export default Employee;
