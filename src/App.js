@@ -11,18 +11,27 @@ import React from 'react'
 
 const BasicExample = () => (
   <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/project">プロジェクト一覧</Link></li>
-        <li><Link to="/project/1">プロジェクト詳細</Link></li>
-      </ul>
+    <div className="container">
+      <div className="row">
+        <div className="col-sm-12">
 
-      <hr/>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/project">プロジェクト一覧</Link></li>
+          <li><Link to="/project/1">プロジェクト詳細</Link></li>
+        </ul>
 
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/project" component={ProjectIndex} />
-      <Route path="/project/:id" component={ProjectShow}/>
+        <hr/>
+      </div>
+    </div>
+
+    <div className="row"></div>
+      <div className="col-sm-12">
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/project" component={ProjectIndex} />
+        <Route path="/project/:id" component={ProjectShow}/>
+
+      </div>
     </div>
   </Router>
 )
