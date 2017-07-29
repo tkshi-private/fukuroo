@@ -1,4 +1,4 @@
-import user from './user'
+import User from './user'
 import {observable, autorun, action} from "mobx";
 
 export default class Project {
@@ -25,8 +25,6 @@ let member = {
   user : user
 }
 
-projects.members.push(
+project.members.push(
   member
 )
-
-export default project.project
