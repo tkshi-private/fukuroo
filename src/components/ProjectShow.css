@@ -1,0 +1,20 @@
+.ProjectShow .list-group {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.ProjectShow .list-group-item {
+  background: rgba(128,128,255,0.4);
+  color: #ddd;
+  border-color: navy;
+}
+
+.btn-blue {
+  background-color: rgba(64,166,200,1);
+  border-color: rgba(44,126,160,1);
+  color: black;
+}
+
+.label {
+  font-weight: 300;
+}
