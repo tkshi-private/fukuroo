@@ -17,10 +17,10 @@ class ProjectIndex extends Component {
           <div className="image-area">
             <img className="image-project" src={project.image_url} alt="icon" />
           </div>
-          <div className="row">
-            <div>{`¥${project.valuation}`}</div>
-            <div>{project.title}</div>
-            <div>{`${project.abstract.substring(0,25)}...`}</div>
+          <div className="detail-area">
+            <div>{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
+            <div>{`${project.title.substring(0,8)}...`}</div>
+            <div>{`${project.abstract.substring(0,24)}...`}</div>
           </div>
           <div className="button-area">
             <Link to={`/projects/${project.pid}`}><img className="icon-image-area" src="../../btn_ list_arrow.png" alt=">" /></Link>

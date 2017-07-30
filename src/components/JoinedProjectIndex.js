@@ -39,10 +39,10 @@ class JoinedProjectIndex extends Component {
             <img className="icon-owner" src="../../05_jolined_project_list_icon_owner.png" alt=">" />
             <img className="image-project" src={project.image_url} alt="icon" />
           </div>
-          <div className="row">
-            <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/ /g,'')}`}</div>
-            <div>{project.title}</div>
-            <div>{`${project.abstract.substring(0,25)}...`}</div>
+          <div className="detail-area">
+            <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
+            <div>{`${project.title.substring(0,8)}...`}</div>
+            <div>{`${project.abstract.substring(0,24)}...`}</div>
           </div>
           <div className="button-area-joined">
             <img className="icon-image-area" src="../../05_jolined_project_list_icon_up.png" alt=">" />
