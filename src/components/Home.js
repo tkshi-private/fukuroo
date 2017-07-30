@@ -16,7 +16,6 @@ class Home extends Component {
       return (
         <div className="Home">
           <img className="Home--img" src="/03_2_login_bg.png"/>
-
           <LoginButton></LoginButton>
         </div>
       )
@@ -24,7 +23,6 @@ class Home extends Component {
 
     return (
       <div className="Home">
-
         {this.renderWorkOrWake()}
       </div>
     );
@@ -43,20 +41,26 @@ class Home extends Component {
   renderWorkOrWake() {
     if(state.currentHour >= 9 && state.currentHour < 17) {
       return (
-        <div>
-          <img className="Home--img" src="/01_top_logo_daytime.png" />
-          <img src="/01_top_btn_wake.png" />
+        <div className="top">
+          <div className="top-image">
+            <img className="Home--img" src="/01_top_logo_daytime.png" />
+          </div>
+          <div className="WakeOrWork">
+            <img src="/01_top_btn_wake.png" />
+          </div>
         </div>
       )
 
     } else {
 
       return (
-        <div>
-          <img className="Home--img" src="/01_top_logo.png" />
-          <Link to='/projects'>
-            <img src="/01_top_btn_work.png" />
-          </Link>
+        <div className="top">
+          <div className="top-image">
+            <img className="Home--img" src="/01_top_logo.png" />
+          </div>
+          <div className="WakeOrWork">
+            <Link to='/projects'> <img src="/01_top_btn_work.png" /> </Link>
+          </div>
         </div>
       )
     }

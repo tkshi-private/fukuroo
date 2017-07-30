@@ -1,11 +1,25 @@
 .Home {
-  min-height: 100%;
   padding: 1em;
+  height: 667px;
 }
 
+.top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:  center;
+  height: 580px;
+}
+
+.top-image {
+  height: 100%;
+  flex: 1;
+}
 .Home--img {
-  width: 100%;
-  height: auto;
+  max-height: 100%;
+}
+.WakeOrWork {
+  height: 62px;
 }
 
 .App--night .Home {
