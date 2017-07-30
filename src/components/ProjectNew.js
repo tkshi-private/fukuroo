@@ -57,7 +57,7 @@ class ProjectNew extends Component {
 
     return (
       <div className="ProjectNew">
-        <h1>新規プロジェクト登録</h1>
+        <h1>新しい副業をはじめる</h1>
 
         <form>
           <div className="form-group">
