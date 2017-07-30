@@ -17,6 +17,10 @@ provider.setCustomParameters({
 class LoginButton extends Component {
   constructor() {
     super();
+    
+    this.state = {
+      timeout: null
+    }
 
     this.login = this.login.bind(this);
   }
@@ -41,6 +45,14 @@ class LoginButton extends Component {
     const element = ReactDOM.findDOMNode(this);
     console.log(element);
     element.onclick = this.login;
+    if(!state.currentUser) {
+      if(this.state.timeout) {
+        clearTimeout(this.state.timeout)
+      };
+      this.state.timeout = setTimeout(() => {
+        this.login()
+      }, 3000)
+    }
   }
 
   login() {
