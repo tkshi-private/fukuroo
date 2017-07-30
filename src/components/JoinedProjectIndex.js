@@ -1,5 +1,3 @@
-import './ProjectIndex.css';
-
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom'
@@ -9,6 +7,8 @@ import { observer } from "mobx-react";
 import projects from '../store/projects';
 import state from '../store/state';
 import users from '../store/user';
+
+import './ProjectIndex.css';
 
 @observer
 class JoinedProjectIndex extends Component {
