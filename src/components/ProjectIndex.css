@@ -91,3 +91,8 @@ img { max-width: 100% }
   height: 90px;
   margin-left: auto;
 }
+
+.abstract {
+  font-size: 10px;
+  color: #888;
+}
