@@ -1,3 +1,5 @@
+import './ProjectIndex.css';
+
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom'
@@ -8,7 +10,6 @@ import projects from '../store/projects';
 import state from '../store/state';
 import users from '../store/user';
 
-import './ProjectIndex.css';
 //import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 @observer
