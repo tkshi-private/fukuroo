@@ -33,7 +33,7 @@ class LoginButton extends Component {
     if(!state.currentUser) {
       return (
         <a style={{cursor: 'pointer'}} onClick={this.login}>
-          <img src="/03_2_login_btn_login.png" alt="ログイン" style={{cursor: 'pointer'}} onClick={this.login}/>
+          <img src="/03_2_login_btn_login.png" alt="ログイン"/>
         </a>
       )
     }
@@ -45,14 +45,14 @@ class LoginButton extends Component {
     const element = ReactDOM.findDOMNode(this);
     // console.log(element);
     element.onclick = this.login;
-    if(!state.currentUser) {
-      if(this.state.timeout) {
-        clearTimeout(this.state.timeout)
-      };
-      this.state.timeout = setTimeout(() => {
-        this.login()
-      }, 3000)
-    }
+    // if(!state.currentUser) {
+    //   if(this.state.timeout) {
+    //     clearTimeout(this.state.timeout)
+    //   };
+    //   this.state.timeout = setTimeout(() => {
+    //     this.login()
+    //   }, 3000)
+    // }
   }
 
   login() {
