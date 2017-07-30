@@ -1,0 +1,9 @@
+.Home {
+  min-height: 100%;
+  padding: 1em;
+}
+
+.Home--img {
+  width: 100%;
+  height: auto;
+}
