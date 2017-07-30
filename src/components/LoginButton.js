@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import firebase from 'firebase';
 import {observer} from "mobx-react";
@@ -28,12 +29,18 @@ class LoginButton extends Component {
     if(!state.currentUser) {
       return (
         <a style={{cursor: 'pointer'}} onClick={this.login}>
-          <img src="/03_2_login_btn_login.png" alt="ログイン"/>
+          <img src="/03_2_login_btn_login.png" alt="ログイン" style={{cursor: 'pointer'}} onClick={this.login}/>
         </a>
       )
     }
 
     return <div></div>
+  }
+
+  componentDidUpdate() {
+    const element = ReactDOM.findDOMNode(this);
+    console.log(element);
+    element.onclick = this.login;
   }
 
   login() {
