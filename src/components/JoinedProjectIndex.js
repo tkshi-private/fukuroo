@@ -15,10 +15,11 @@ import users from '../store/user';
 @observer
 class JoinedProjectIndex extends Component {
   renderUserInfo() {
+    const user = _.find(users, u => u.uid === this.props.match.params.id)
     return (
       <div className="user-info">
-        <img className="img-circle" src={state.currentUser.photoURL} />
-        <div>{state.currentUser.name}</div>
+        <img className="img-circle" src={user.photoURL} />
+        <div>{user.name}</div>
       </div>
     );
   }
@@ -30,7 +31,7 @@ class JoinedProjectIndex extends Component {
     }
 
     const ownProjects = _.filter(projects, p => {
-      return _.find(p.members, m => m.uid === state.currentUser.uid)
+      return _.find(p.members, m => m.uid === this.props.match.params.id)
     });
 
     const list = _.map(ownProjects, (project) => {
