@@ -56,6 +56,7 @@ class LoginButton extends Component {
   }
 
   login() {
+    alert('ログインします');
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
       // This gives you a Facebook Access Token.
