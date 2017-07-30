@@ -41,19 +41,19 @@ class LoginButton extends Component {
     return <div></div>
   }
 
-  // componentDidUpdate() {
-  //   const element = ReactDOM.findDOMNode(this);
-  //   // console.log(element);
-  //   element.onclick = this.login;
-  //   if(!state.currentUser) {
-  //     if(this.state.timeout) {
-  //       clearTimeout(this.state.timeout)
-  //     };
-  //     this.state.timeout = setTimeout(() => {
-  //       this.login()
-  //     }, 3000)
-  //   }
-  // }
+  componentDidUpdate() {
+    const element = ReactDOM.findDOMNode(this);
+    // console.log(element);
+    element.onclick = this.login;
+    if(!state.currentUser) {
+      if(this.state.timeout) {
+        clearTimeout(this.state.timeout)
+      };
+      this.state.timeout = setTimeout(() => {
+        this.login()
+      }, 3000)
+    }
+  }
 
   login() {
     // alert('ログインします');
