@@ -30,28 +30,28 @@ class NavBar extends Component {
     }
 
     const currentUserBlock = 
-      <div className="row">
-        <div className="col-xs-4 col-xs-offset-8 text-right">
+        <div className="col-xs-3 text-right">
+          <Link to={`/users/${state.currentUser.uid}/joined`}>
           <img
             className="img-circle"
             alt={userObject.email}
             src={userObject.photoURL}/>
-        </div>
+          </Link>
       </div>;
 
     return (
       <div className="row">
-        <div className="col-sm-12">
-
-          {currentUserBlock}
-
-          <ul className="list-inline">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/projects">プロジェクト一覧</Link></li>
-          </ul>
-
-          <hr/>
+        <div className="col-xs-3 padding-top">
+          <Link to="/">ホーム</Link>
         </div>
+
+        <div className="col-xs-6 padding-top">
+          <Link to="/projects">プロジェクト</Link>
+        </div>
+
+        {currentUserBlock}
+
+        <hr/>
       </div>
     )
   }

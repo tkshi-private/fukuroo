@@ -1,3 +1,5 @@
+import './Home.css'
+
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom'
@@ -12,8 +14,8 @@ class Home extends Component {
 
     if(!state.currentUser) {
       return (
-        <div className="App">
-          <img src="/03_2_login_bg.png"/>
+        <div className="Home">
+          <img className="Home--img" src="/03_2_login_bg.png"/>
 
           <LoginButton></LoginButton>
         </div>
@@ -21,7 +23,8 @@ class Home extends Component {
     }
 
     return (
-      <div className="App">
+      <div className="Home">
+
         {this.renderWorkOrWake()}
       </div>
     );
@@ -41,7 +44,7 @@ class Home extends Component {
     if(state.currentHour >= 9 && state.currentHour < 17) {
       return (
         <div>
-          <img src="/01_top_logo_daytime.png" />
+          <img className="Home--img" src="/01_top_logo_daytime.png" />
         </div>
       )
 
@@ -49,7 +52,7 @@ class Home extends Component {
 
       return (
         <div>
-          <img src="/01_top_logo.png" />
+          <img className="Home--img" src="/01_top_logo.png" />
           <Link to='/projects'>
             <img src="/01_top_btn_wake.png" />
           </Link>
