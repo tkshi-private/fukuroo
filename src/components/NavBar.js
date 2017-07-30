@@ -40,18 +40,20 @@ class NavBar extends Component {
       </div>;
 
     return (
-      <div className="row">
-        <div className="col-xs-3 padding-top">
-          <Link to="/">ホーム</Link>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-3 padding-top">
+            <Link to="/">ホーム</Link>
+          </div>
+
+          <div className="col-xs-6 padding-top">
+            <Link to="/projects">プロジェクト</Link>
+          </div>
+
+          {currentUserBlock}
+
+          <hr/>
         </div>
-
-        <div className="col-xs-6 padding-top">
-          <Link to="/projects">プロジェクト</Link>
-        </div>
-
-        {currentUserBlock}
-
-        <hr/>
       </div>
     )
   }

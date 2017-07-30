@@ -34,8 +34,7 @@ class App extends Component {
 
           {this.renderNavbar()}
 
-          <div className="row">
-            <div className="col-sm-12">
+          <div className="">
 
               <Route exact path="/" component={Home}/>
 
@@ -45,7 +44,6 @@ class App extends Component {
               <Route path="/users/:id/joined" component={JoinedProjectIndex}/>
               <Route path="/companies/:id/users" component={Employee}/>
 
-            </div>
           </div>
 
           <Clock></Clock>
