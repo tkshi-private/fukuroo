@@ -57,6 +57,10 @@
   height: 22px;
   margin-left: auto;
 }
+.label-valuation {
+  color: #fff000;
+  font-family: "Open Sans";
+}
 .row {
   margin: 0 10px 0 10px;
   flex: 1;

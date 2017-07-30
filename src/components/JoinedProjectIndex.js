@@ -9,6 +9,7 @@ import state from '../store/state';
 import users from '../store/user';
 
 import './ProjectIndex.css';
+//import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 @observer
 class JoinedProjectIndex extends Component {
@@ -16,7 +17,7 @@ class JoinedProjectIndex extends Component {
     return (
       <div className="user-info">
         <img className="img-circle" src={state.currentUser.photoURL} />
-        <div>{state.currentUser.displayName}</div>
+        <div>{state.currentUser.name}</div>
       </div>
     );
   }
@@ -39,7 +40,7 @@ class JoinedProjectIndex extends Component {
             <img className="image-project" src={project.image_url} alt="icon" />
           </div>
           <div className="row">
-            <div>{`¥${project.valuation}`}</div>
+            <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/ /g,'')}`}</div>
             <div>{project.title}</div>
             <div>{`${project.abstract.substring(0,25)}...`}</div>
           </div>
