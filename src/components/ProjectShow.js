@@ -1,12 +1,16 @@
+import './ProjectShow.css'
+
+import {Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts';
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom'
 import _ from 'lodash';
 import firebase from 'firebase';
 import {observer} from "mobx-react";
 import projects from '../store/projects';
 import state from '../store/state';
 import users from '../store/user';
-import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts';
+
 const data = [
       {name: "2017/7/6", uv: 400, pv: 2400, amt: 2400},
       {name: "2017/7/7", uv: 100, pv: 2400, amt: 2400},
@@ -20,7 +24,7 @@ const data = [
 const SimpleAreaChart = React.createClass({
 	render () {
   	return (
-    	<AreaChart width={300} height={200} data={data}
+    	<AreaChart width={350} height={200} data={data}
             margin={{top: 10, right: 30, left: 0, bottom: 0}}>
         <XAxis dataKey="name"/>
         <YAxis/>
@@ -51,7 +55,7 @@ class ProjectShow extends Component {
     }
 
     return (
-      <div className="App">
+      <div className="ProjectShow">
         <h1>{project.title}</h1>
         <img src={project.image_url} alt={project.title}/>
         <div>
@@ -94,36 +98,41 @@ class ProjectShow extends Component {
   renderMember(member, key) {
     let button = '';
     const project = _.find(projects, p => p.pid === this.props.match.params.id)
-    console.log(member.stock_share)
-    console.log(project.valuation)
+    // console.log(member.stock_share)
+    // console.log(project.valuation)
     if(!member.uid && !this.hasAlreadyRole()) {
       button = (
-        <button className="btn btn-primary" onClick={(event) => this.joinAsMember(event, key)}>
+        <button className="btn btn-blue btn-block" onClick={(event) => this.joinAsMember(event, key)}>
           参加する
         </button>
       )
     } else if(state.currentUser && member.uid === state.currentUser.uid){
       button = (
-        <button className="btn btn-danger" onClick={(event) => this.removeMember(event, key)}>
+        <button className="btn btn-danger btn-block" onClick={(event) => this.removeMember(event, key)}>
           やめる
         </button>
       )
     }
 
     return (
-      <div className="row">
-        <div className="col-xs-3">
-          {this.renderUserImage(member.uid)}
-        </div>
-        {/* <div className="col-xs-6">
-          {this.renderUserByUid(member.uid)}<br/>
-          ロール: {member.role}<br/>
-          持ち株比率: {member.stock_share}
-          現在評価額: ¥{(Number(member.stock_share.replace('%','') / 100) * project.valuation).toLocaleString()}
-        </div> */}
+      <div>
+        <div className="row">
+          <div className="col-xs-3">
+            {this.renderUserImage(member.uid)}
+          </div>
 
-        <div className="col-xs-3">
-          {button}
+          <div className="col-xs-6">
+            {this.renderUserByUid(member.uid)}<br/>
+            役割 {member.role}<br/>
+            報酬株 {member.stock_share}<br/>
+            現在評価額 ¥{(Number(member.stock_share.replace('%','') / 100) * project.valuation).toLocaleString()}
+          </div> 
+        </div>
+
+        <div className="row">
+          <div className="col-xs-6 col-xs-offset-3">
+            {button}
+          </div>
         </div>
       </div>
     )
@@ -135,9 +144,11 @@ class ProjectShow extends Component {
     if(!user) return ''
 
     return (
-      <img className="img-rounded"
-        src={user.photoURL}
-        alt="none"/>
+      <Link to={`/users/${user.uid}/joined`}>
+        <img className="img-rounded"
+          src={user.photoURL}
+          alt="none"/>
+      </Link>
     )
   }
 
