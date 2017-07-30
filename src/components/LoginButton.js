@@ -10,7 +10,7 @@ import users from '../store/user'
 
 const provider = new firebase.auth.FacebookAuthProvider();
 provider.setCustomParameters({
-  'display': 'popup'
+  'display': 'iframe'
 });
 
 @observer
@@ -41,22 +41,22 @@ class LoginButton extends Component {
     return <div></div>
   }
 
-  componentDidUpdate() {
-    const element = ReactDOM.findDOMNode(this);
-    console.log(element);
-    element.onclick = this.login;
-    if(!state.currentUser) {
-      if(this.state.timeout) {
-        clearTimeout(this.state.timeout)
-      };
-      this.state.timeout = setTimeout(() => {
-        this.login()
-      }, 3000)
-    }
-  }
+  // componentDidUpdate() {
+  //   const element = ReactDOM.findDOMNode(this);
+  //   // console.log(element);
+  //   element.onclick = this.login;
+  //   if(!state.currentUser) {
+  //     if(this.state.timeout) {
+  //       clearTimeout(this.state.timeout)
+  //     };
+  //     this.state.timeout = setTimeout(() => {
+  //       this.login()
+  //     }, 3000)
+  //   }
+  // }
 
   login() {
-    alert('ログインします');
+    // alert('ログインします');
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
       // This gives you a Facebook Access Token.
