@@ -18,7 +18,7 @@ class ProjectIndex extends Component {
             <img className="image-project" src={project.image_url} alt="icon" />
           </div>
           <div className="detail-area">
-            <div>{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
+            <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
             <div>{`${project.title.substring(0,8)}...`}</div>
             <div>{`${project.abstract.substring(0,24)}...`}</div>
           </div>
