@@ -25,7 +25,7 @@ class Clock extends Component {
           state.currentHour = 0;
         }
       }
-    }, 100)
+    }, 500)
 
     this.toggleDayOrNight = this.toggleDayOrNight.bind(this);
   }
@@ -49,6 +49,7 @@ class Clock extends Component {
     if(state.currentHour >= 9 && state.currentHour < 17) {
       state.currentHour = 17;
       this.setState({minutes: 0});
+      console.log(this.props.location);
     } else {
       state.currentHour = 9;
       this.setState({minutes: 0});
