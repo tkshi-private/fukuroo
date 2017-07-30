@@ -14,7 +14,7 @@ export function startSyncFirebaseData(){
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       addIfNotExistingUser(user)
-      state.currentUser = user;
+      state.currentUser = getUserObject(user);
     } else {
       state.currentUser = null;
     }
@@ -40,7 +40,8 @@ export function startSyncFirebaseData(){
       const existingUser = _.find(users, u => u.email === user.email);
 
       if(existingUser) {
-        console.log('User already exists, not adding');
+        console.log('User already exists, not adding', state.currentUser);
+        initializeListeners();
         return
       }
 
@@ -48,63 +49,80 @@ export function startSyncFirebaseData(){
 
       console.log('Adding new user', userObject);
       const newUsersRef = firebase.database().ref("users");
-      const newUserRef = newUsersRef.push(userObject);
+      const newUserRef = newUsersRef.push(userObject)
+      .then(res => {
+        initializeListeners();
+      });
+
 
     })
   }
 
 
-  // sync projects
-  const projectsRef = firebase.database().ref('projects');
+  function initializeListeners() {
+    // sync projects
+    const projectsRef = firebase.database().ref('projects');
 
-  // projectsRef.on('value', (data) => {
-  //   _.map(data.val(), (value, key) => {
-  //     const newProject = value;
-  //     newProject.pid = key;
-  //     projects.push(newProject)
-  //   })
-  // })
+    // projectsRef.on('value', (data) => {
+    //   _.map(data.val(), (value, key) => {
+    //     const newProject = value;
+    //     newProject.pid = key;
+    //     projects.push(newProject)
+    //   })
+    // })
 
-  projectsRef.on('child_added', (data) => {
-    // console.log('added', data.val())
-    const newProject = data.val();
-    newProject.pid = data.key;
-    projects.push(newProject);
-  });
+    projectsRef.on('child_added', (data) => {
+      // console.log('added', data.val())
+      const newProject = data.val();
+      newProject.pid = data.key;
+      projects.push(newProject);
+    });
 
-  projectsRef.on('child_changed', (data) => {
-    // console.log('changed', data.val())
-    const newProject = data.val();
-    newProject.pid = data.key;
-    const index = _.findIndex(projects, p => p.pid === data.key)
-    projects[index] = newProject;
-  });
+    projectsRef.on('child_changed', (data) => {
+      // console.log('changed', data.val())
+      const newProject = data.val();
+      newProject.pid = data.key;
+      const index = _.findIndex(projects, p => p.pid === data.key)
+      projects[index] = newProject;
+    });
 
-  projectsRef.on('child_removed', (data) => {
-    // console.log('removed', data.val())
-    const index = _.findIndex(projects, p => p.pid === data.key)
-    projects.splice(index, 1)
-  });
+    projectsRef.on('child_removed', (data) => {
+      // console.log('removed', data.val())
+      const index = _.findIndex(projects, p => p.pid === data.key)
+      projects.splice(index, 1)
+    });
 
-  // sync users
-  const usersRef = firebase.database().ref('users');
-  usersRef.on('child_added', (data) => {
-    const newUser = data.val();
-    newUser.uid = data.key;
-    users.push(newUser);
-  });
+    // sync users
+    const usersRef = firebase.database().ref('users');
+    usersRef.on('child_added', (data) => {
+      const newUser = data.val();
+      newUser.uid = data.key;
 
-  usersRef.on('child_changed', (data) => {
-    // console.log('changed', data.val())
-    const newUser = data.val();
-    newUser.pid = data.key;
-    const index = _.findIndex(users, p => p.uid === data.key)
-    users[index] = newUser;
-  });
+      // set current user uid correctly.. >_<
+      // there is firebase/facebook login user uid
+      // and actual user object key...
+      if(newUser.email === state.currentUser.email) {
+        const user = getUserObject(newUser);
+        user.uid = newUser.uid;
+        state.currentUser = user;
+      }
+      users.push(newUser);
+    });
 
-  usersRef.on('child_removed', (data) => {
-    // console.log('removed', data.val())
-    const index = _.findIndex(users, p => p.uid === data.key)
-    users.splice(index, 1)
-  });
+    usersRef.on('child_changed', (data) => {
+      // console.log('changed', data.val())
+      const newUser = data.val();
+      newUser.pid = data.key;
+      const index = _.findIndex(users, p => p.uid === data.key)
+      users[index] = newUser;
+    });
+
+    usersRef.on('child_removed', (data) => {
+      // console.log('removed', data.val())
+      const index = _.findIndex(users, p => p.uid === data.key)
+      users.splice(index, 1)
+    });
+
+  }
+
 }
