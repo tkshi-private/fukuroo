@@ -68,6 +68,7 @@ class LoginButton extends Component {
 
       state.currentUser = user;
       console.log('logged in as', user)
+      alert('ログインできました')
       // this.setState({currentUser: user})
 
       // This will trigger in onAuthStateChanged so not needed
@@ -83,6 +84,7 @@ class LoginButton extends Component {
       const credential = error.credential;
 
       console.error('error', errorCode, errorMessage, email, credential)
+      alert('ログイン失敗しました', errorMessage)
     });
   }
 
