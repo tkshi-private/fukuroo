@@ -26,7 +26,12 @@ class JoinedProjectIndex extends Component {
     if(!state.loginStateFetched) {
       return <div></div>
     }
-    const list = _.map(projects, (project) => {
+
+    const ownProjects = _.filter(projects, p => {
+      return _.find(p.members, m => m.uid === state.currentUser.uid)
+    });
+
+    const list = _.map(ownProjects, (project) => {
       return (
         <div className="project-container" key={project.pid}>
           <div className="image-area-joined">

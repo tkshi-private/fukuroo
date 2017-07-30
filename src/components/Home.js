@@ -9,6 +9,7 @@ import state from '../store/state'
 @observer
 class Home extends Component {
   render() {
+
     if(!state.currentUser) {
       return (
         <div className="App">
@@ -26,6 +27,16 @@ class Home extends Component {
 
       </div>
     );
+  }
+
+  componentWillMount() {
+    // console.log(this.props, this.props.history, this.props.location, this.context.router)
+    if(this.props.location.pathname === '/') {
+      state.hideNavbar = true;
+    } else {
+      state.hideNavbar = false;
+    }
+
   }
 
   renderWorkOrWake() {
