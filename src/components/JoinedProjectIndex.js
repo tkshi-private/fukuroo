@@ -42,12 +42,12 @@ class JoinedProjectIndex extends Component {
           </div>
           <div className="detail-area">
             <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
-            <div>{`${project.title.substring(0,8)}...`}</div>
-            <div>{`${project.abstract.substring(0,24)}...`}</div>
+            <div>{`${project.title.substring(0,12)}...`}</div>
+            <div className="abstract">{`${project.abstract.substring(0,24)}...`}</div>
           </div>
           <div className="button-area-joined">
             <img className="icon-image-area" src="../../05_jolined_project_list_icon_up.png" alt=">" />
-            <Link to={`/projects/${project.pid}`}><img className="icon-image-area" src="../../btn_ list_arrow.png" alt=">" /></Link>
+            <Link to={`/projects/${project.pid}`}><img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" /></Link>
           </div>
         </div>
       );
