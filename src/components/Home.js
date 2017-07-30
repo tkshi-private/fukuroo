@@ -45,6 +45,7 @@ class Home extends Component {
       return (
         <div>
           <img className="Home--img" src="/01_top_logo_daytime.png" />
+          <img src="/01_top_btn_wake.png" />
         </div>
       )
 
@@ -54,7 +55,7 @@ class Home extends Component {
         <div>
           <img className="Home--img" src="/01_top_logo.png" />
           <Link to='/projects'>
-            <img src="/01_top_btn_wake.png" />
+            <img src="/01_top_btn_work.png" />
           </Link>
         </div>
       )
