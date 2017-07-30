@@ -6,6 +6,31 @@ import {observer} from "mobx-react";
 import projects from '../store/projects';
 import state from '../store/state';
 import users from '../store/user';
+import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts';
+const data = [
+      {name: "2017/7/6", uv: 400, pv: 2400, amt: 2400},
+      {name: "2017/7/7", uv: 100, pv: 2400, amt: 2400},
+      {name: "2017/7/8", uv: 600, pv: 2400, amt: 2400},
+      {name: "2017/7/9", uv: 400, pv: 2400, amt: 2400},
+      {name: "2017/7/10", uv: 300, pv: 2400, amt: 2400},
+      {name: "2017/7/11", uv: 200, pv: 2400, amt: 2400},
+      {name: "2017/7/12", uv: 100, pv: 2400, amt: 2400},
+      {name: "2017/7/13", uv: 1000, pv: 2400, amt: 2400},
+];
+const SimpleAreaChart = React.createClass({
+	render () {
+  	return (
+    	<AreaChart width={300} height={200} data={data}
+            margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+        <XAxis dataKey="name"/>
+        <YAxis/>
+        <CartesianGrid strokeDasharray="3 3"/>
+        <Tooltip/>
+        <Area type='monotone' dataKey='uv' stroke='#8884d8' fill='#8884d8' />
+      </AreaChart>
+    );
+  }
+})
 
 @observer
 class ProjectShow extends Component {
@@ -29,6 +54,9 @@ class ProjectShow extends Component {
       <div className="App">
         <h1>{project.title}</h1>
         <img src={project.image_url} alt={project.title}/>
+        <div>
+          <SimpleAreaChart />
+        </div>
         <div>
           プロジェクトの日付：{project.created_at}
         </div>
