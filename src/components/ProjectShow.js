@@ -6,26 +6,43 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import _ from 'lodash';
 import firebase from 'firebase';
+import moment from 'moment';
 import {observer} from "mobx-react";
 import projects from '../store/projects';
 import state from '../store/state';
 import users from '../store/user';
 
-const data = [
-      {name: "2017/7/6", uv: 400, pv: 2400, amt: 2400},
-      {name: "2017/7/7", uv: 100, pv: 2400, amt: 2400},
-      {name: "2017/7/8", uv: 600, pv: 2400, amt: 2400},
-      {name: "2017/7/9", uv: 400, pv: 2400, amt: 2400},
-      {name: "2017/7/10", uv: 300, pv: 2400, amt: 2400},
-      {name: "2017/7/11", uv: 200, pv: 2400, amt: 2400},
-      {name: "2017/7/12", uv: 100, pv: 2400, amt: 2400},
-      {name: "2017/7/13", uv: 1000, pv: 2400, amt: 2400},
+const dummyData = [
+  {name: "2017/7/6", uv: 400, pv: 2400, amt: 2400},
+  {name: "2017/7/7", uv: 100, pv: 2400, amt: 2400},
+  {name: "2017/7/8", uv: 600, pv: 2400, amt: 2400},
+  {name: "2017/7/9", uv: 400, pv: 2400, amt: 2400},
+  {name: "2017/7/10", uv: 300, pv: 2400, amt: 2400},
+  {name: "2017/7/11", uv: 200, pv: 2400, amt: 2400},
+  {name: "2017/7/12", uv: 100, pv: 2400, amt: 2400},
+  {name: "2017/7/13", uv: 1000, pv: 2400, amt: 2400},
 ];
 const SimpleAreaChart = React.createClass({
 	render () {
+    const valuationHistory = this.props.project.valuation_history;
+    let data;
+    if(!valuationHistory) {
+      data = dummyData;
+    } else {
+      data = _.map(valuationHistory, (d, i) => {
+        const date = moment().subtract(valuationHistory.length - i, 'days').format('YYYY/MM/DD')
+        console.log(d)
+        return {
+          name: date,
+          uv: d
+        }
+      });
+    }
+
+
   	return (
     	<AreaChart width={350} height={200} data={data}
-            margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+            margin={{top: 10, right: 30, left: 20, bottom: 0}}>
         <XAxis dataKey="name"/>
         <YAxis/>
         <CartesianGrid strokeDasharray="3 3"/>
@@ -59,7 +76,7 @@ class ProjectShow extends Component {
         <h1>{project.title}</h1>
         <img src={project.image_url} alt={project.title}/>
         <div>
-          <SimpleAreaChart />
+          <SimpleAreaChart project={project}/>
         </div>
         <div>
           プロジェクトの日付：{project.created_at}
