@@ -31,7 +31,6 @@ const SimpleAreaChart = React.createClass({
     } else {
       data = _.map(valuationHistory, (d, i) => {
         const date = moment().subtract(valuationHistory.length - i, 'days').format('YYYY/MM/DD')
-        console.log(d)
         return {
           name: date,
           uv: d
