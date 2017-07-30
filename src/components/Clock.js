@@ -33,16 +33,16 @@ class Clock extends Component {
   render() {
     return (
       <div className="Clock" onClick={this.toggleDayOrNight}>
-        {state.currentHour}:{this.renderPrefixedMinutes()}
+        {this.renderPrefixedNumber(state.currentHour)}:{this.renderPrefixedNumber(this.state.minutes)}
       </div>
     );
   }
 
-  renderPrefixedMinutes() {
-    if(this.state.minutes < 10) {
-      return '0' + this.state.minutes
+  renderPrefixedNumber(number) {
+    if(number < 10) {
+      return '0' + number;
     }
-    return this.state.minutes
+    return number;
   }
 
   toggleDayOrNight(event) {

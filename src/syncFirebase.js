@@ -23,7 +23,7 @@ export function startSyncFirebaseData(){
 
   function getUserObject(user) {
     const userObject = {
-      name: user.displayName,
+      name: user.displayName || user.name,
       email: user.email,
       photoURL: user.photoURL,
     }
@@ -102,6 +102,7 @@ export function startSyncFirebaseData(){
       // there is firebase/facebook login user uid
       // and actual user object key...
       if(newUser.email === state.currentUser.email) {
+        // Do like this to cause proper update detection
         const user = getUserObject(newUser);
         user.uid = newUser.uid;
         state.currentUser = user;
