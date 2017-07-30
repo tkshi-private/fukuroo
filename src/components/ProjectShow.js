@@ -93,7 +93,9 @@ class ProjectShow extends Component {
 
   renderMember(member, key) {
     let button = '';
-
+    const project = _.find(projects, p => p.pid === this.props.match.params.id)
+    console.log(member.stock_share)
+    console.log(project.valuation)
     if(!member.uid && !this.hasAlreadyRole()) {
       button = (
         <button className="btn btn-primary" onClick={(event) => this.joinAsMember(event, key)}>
@@ -113,11 +115,12 @@ class ProjectShow extends Component {
         <div className="col-xs-3">
           {this.renderUserImage(member.uid)}
         </div>
-        <div className="col-xs-6">
+        {/* <div className="col-xs-6">
           {this.renderUserByUid(member.uid)}<br/>
           ロール: {member.role}<br/>
           持ち株比率: {member.stock_share}
-        </div>
+          現在評価額: ¥{(Number(member.stock_share.replace('%','') / 100) * project.valuation).toLocaleString()}
+        </div> */}
 
         <div className="col-xs-3">
           {button}

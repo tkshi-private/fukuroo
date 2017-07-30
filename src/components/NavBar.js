@@ -29,7 +29,7 @@ class NavBar extends Component {
       userObject = state.currentUser;
     }
 
-    const currentUserBlock = 
+    const currentUserBlock =
         <div className="col-xs-3 text-right">
           <Link to={`/users/${state.currentUser.uid}/joined`}>
           <img
@@ -40,7 +40,7 @@ class NavBar extends Component {
       </div>;
 
     return (
-      <div className="container">
+      <div className="container NavBar">
         <div className="row">
           <div className="col-xs-3 padding-top">
             <Link to="/">ホーム</Link>
