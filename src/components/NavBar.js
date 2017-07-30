@@ -8,6 +8,8 @@ import {observer} from "mobx-react";
 import state from '../store/state';
 import users from '../store/user';
 
+import './NavBar.css'
+
 @observer
 class NavBar extends Component {
   render() {
@@ -30,7 +32,7 @@ class NavBar extends Component {
     }
 
     const currentUserBlock =
-        <div className="col-xs-3 text-right">
+      <div className="nav-icon-area">
           <Link to={`/users/${state.currentUser.uid}/joined`}>
           <img
             className="img-circle"
@@ -41,12 +43,12 @@ class NavBar extends Component {
 
     return (
       <div className="container NavBar">
-        <div className="row">
-          <div className="col-xs-3 padding-top">
-            <Link to="/">ホーム</Link>
+        <div className="nav-area">
+          <div className="nav-button-area">
+            <Link to="/"><img className="icon-image-area icon-arrow" src="../../arrow_for_list_r.png" alt=">" /></Link>
           </div>
 
-          <div className="col-xs-6 padding-top">
+          <div className="main-title">
             <Link to="/projects">プロジェクト</Link>
           </div>
 
