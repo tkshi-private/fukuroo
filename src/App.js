@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className={`App container ${this.getDayOrNightClass()}`}>
+        <div className={`App ${this.getDayOrNightClass()}`}>
 
           {this.renderNavbar()}
 

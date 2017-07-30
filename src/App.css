@@ -1,9 +1,8 @@
 html, body {
-  height:100%;
+  min-height:100%;
 }
 
 #root {
-  height: 100%;
   min-height: 100%;
 }
 
@@ -38,6 +37,10 @@ html, body {
 .App--night {
   background-color: navy;
   color: white;
+}
+
+.list-group {
+  color: black;
 }
 
 @keyframes App-logo-spin {
