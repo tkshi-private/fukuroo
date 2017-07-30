@@ -76,6 +76,15 @@
   margin: 0 10px 0 10px;
   font-size: 11pt;
   flex: 1;
+  color: #222;
+}
+
+.title {
+  color: white;
+}
+
+.App--day .title {
+  color: #222;
 }
 img { max-width: 100% }
 

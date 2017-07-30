@@ -1,3 +1,5 @@
+import './NavBar.css'
+
 import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
@@ -8,8 +10,6 @@ import {observer} from "mobx-react";
 import state from '../store/state';
 import users from '../store/user';
 
-import './NavBar.css'
-
 @observer
 class NavBar extends Component {
   render() {
@@ -19,7 +19,8 @@ class NavBar extends Component {
 
     if(!state.currentUser) {
       return (
-        <LoginButton></LoginButton>
+        <div></div>
+        // <LoginButton></LoginButton>
       )
     }
 
