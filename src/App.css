@@ -1,5 +1,6 @@
 html, body {
   min-height:100%;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #root {
@@ -7,7 +8,7 @@ html, body {
 }
 
 .App {
-  text-align: center;
+  /* text-align: center; */
   min-height: 100%;
   height: 100%;
   margin: 0 auto;
@@ -35,7 +36,7 @@ html, body {
 }
 
 .App--night {
-  background-color: navy;
+  background-color: #010C42;
   color: white;
 }
 
