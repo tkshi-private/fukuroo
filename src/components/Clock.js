@@ -13,19 +13,21 @@ class Clock extends Component {
     super()
 
     this.state = {
-      minutes: 0
+      minutes: 0,
+      interval: null
     }
 
-    setInterval(() => {
+    this.state.interval = setInterval(() => {
       this.setState({minutes: this.state.minutes + 1});
       if(this.state.minutes >= 60) {
         this.setState({minutes: 0});
         state.currentHour += 1
+        clearInterval(this.state.interval);
         if(state.currentHour >= 24) {
           state.currentHour = 0;
         }
       }
-    }, 500)
+    }, 50)
 
     this.toggleDayOrNight = this.toggleDayOrNight.bind(this);
   }
@@ -46,10 +48,15 @@ class Clock extends Component {
   }
 
   toggleDayOrNight(event) {
+    if(!this.state.interval) {
+      return;
+    }
+
     if(state.currentHour >= 9 && state.currentHour < 17) {
       state.currentHour = 17;
       this.setState({minutes: 0});
       console.log(this.props.location);
+      clearInterval(this.state.interval);
     } else {
       state.currentHour = 9;
       this.setState({minutes: 0});
