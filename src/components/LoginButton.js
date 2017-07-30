@@ -27,7 +27,7 @@ class LoginButton extends Component {
 
     if(!state.currentUser) {
       return (
-        <a onClick={this.login}>
+        <a style={{cursor: 'pointer'}} onClick={this.login}>
           <img src="/03_2_login_btn_login.png" alt="ログイン"/>
         </a>
       )
