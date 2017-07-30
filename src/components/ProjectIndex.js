@@ -23,7 +23,7 @@ class ProjectIndex extends Component {
             <div>{`${project.abstract.substring(0,24)}...`}</div>
           </div>
           <div className="button-area">
-            <Link to={`/projects/${project.pid}`}><img className="icon-image-area" src="../../btn_ list_arrow.png" alt=">" /></Link>
+            <Link to={`/projects/${project.pid}`}><img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" /></Link>
           </div>
         </div>
       );

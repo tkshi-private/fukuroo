@@ -47,7 +47,7 @@ class JoinedProjectIndex extends Component {
           </div>
           <div className="button-area-joined">
             <img className="icon-image-area" src="../../05_jolined_project_list_icon_up.png" alt=">" />
-            <Link to={`/projects/${project.pid}`}><img className="icon-image-area" src="../../btn_ list_arrow.png" alt=">" /></Link>
+            <Link to={`/projects/${project.pid}`}><img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" /></Link>
           </div>
         </div>
       );

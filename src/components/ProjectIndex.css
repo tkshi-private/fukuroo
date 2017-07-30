@@ -42,6 +42,9 @@
   width: 90px;
 }
 .button-area-joined {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  space-around;
   width: 60px;
 }
 .icon-owner {
@@ -53,17 +56,21 @@
   width: 60px;
 }
 .icon-image-area {
-  width: 22px;
-  height: 22px;
-  margin-left: auto;
+  width:  28px;
+  height: 28px;
 }
+.icon-arrow {
+  width:  20px;
+  height: 40px;
+}
+
 .label-valuation {
   color: #fff000;
-  font-family: "Open Sans";
+  font-size: 14pt;
 }
 .detail-area {
   margin: 0 10px 0 10px;
-  font-size: 15pt;
+  font-size: 11pt;
   flex: 1;
 }
 img { max-width: 100% }
