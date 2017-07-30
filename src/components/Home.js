@@ -26,7 +26,6 @@ class Home extends Component {
       <div className="Home">
 
         {this.renderWorkOrWake()}
-
       </div>
     );
   }
@@ -48,7 +47,7 @@ class Home extends Component {
           <img className="Home--img" src="/01_top_logo_daytime.png" />
         </div>
       )
-      
+
     } else {
 
       return (
