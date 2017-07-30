@@ -1,0 +1,12 @@
+.joined_user_image{
+  display: flex;
+  height: 40px;
+}
+
+.joined_users{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
