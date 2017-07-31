@@ -21,7 +21,7 @@ class ProjectIndex extends Component {
           <div className="detail-area">
             <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
             <div className="title">{`${project.title.substring(0, 12)}...`}</div>
-            <div className="abstract">{`${project.abstract.substring(0,24)}...`}</div> 
+            <div className="abstract">{`${project.abstract.substring(0,24)}...`}</div>
           </div>
           <div className="button-area">
             <img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" />

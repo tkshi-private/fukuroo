@@ -10,8 +10,6 @@ import projects from '../store/projects';
 import state from '../store/state';
 import users from '../store/user';
 
-//import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
 @observer
 class JoinedProjectIndex extends Component {
   renderUserInfo() {
@@ -23,7 +21,6 @@ class JoinedProjectIndex extends Component {
       </div>
     );
   }
-  //-KqCnu38CyFFsBpYGXVv
 
   render() {
     if(!state.loginStateFetched) {
