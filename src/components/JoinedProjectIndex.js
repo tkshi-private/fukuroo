@@ -36,6 +36,7 @@ class JoinedProjectIndex extends Component {
 
     const list = _.map(ownProjects, (project) => {
       return (
+        <Link to={`/projects/${project.pid}`}>
         <div className="project-container" key={project.pid}>
           <div className="image-area-joined">
             <img className="icon-owner" src="../../05_jolined_project_list_icon_owner.png" alt=">" />
@@ -48,9 +49,10 @@ class JoinedProjectIndex extends Component {
           </div>
           <div className="button-area-joined">
             <img className="icon-image-area" src="../../05_jolined_project_list_icon_up.png" alt=">" />
-            <Link to={`/projects/${project.pid}`}><img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" /></Link>
+            <img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" />
           </div>
         </div>
+        </Link>
       );
     })
 

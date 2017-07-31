@@ -13,6 +13,7 @@ class ProjectIndex extends Component {
   render() {
     const list = _.map(projects, (project) => {
       return (
+        <Link to={`/projects/${project.pid}`}>
         <div className="project-container" key={project.pid}>
           <div className="image-area">
             <img className="image-project" src={project.image_url} alt="icon" />
@@ -23,9 +24,10 @@ class ProjectIndex extends Component {
             <div className="abstract">{`${project.abstract.substring(0,24)}...`}</div> 
           </div>
           <div className="button-area">
-            <Link to={`/projects/${project.pid}`}><img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" /></Link>
+            <img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" />
           </div>
         </div>
+        </Link>
       );
     })
 
