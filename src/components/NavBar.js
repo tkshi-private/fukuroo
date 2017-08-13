@@ -32,6 +32,30 @@ class NavBar extends Component {
       userObject = state.currentUser;
     }
 
+    // 動作不安定
+    var path = window.location.pathname;
+    var backpath;
+    console.log(path);
+    switch(true) {
+      case /projects\/*/.test(path):
+        backpath = "/projects";
+        break;
+      case /projects/.test(path):
+        backpath = "/";
+        break;
+      case /new-project/.test(path):
+        backpath = "/projects";
+        break;
+      case /users\/*\/joined/.test(path):
+        backpath = "/projects";
+        break;
+      case /companies\/*\/users/.test(path):
+        backpath = "/";
+        break;
+      default:
+        break;
+    }
+
     const currentUserBlock =
       <div className="nav-icon-area">
           <Link to={`/users/${state.currentUser.uid}/joined`}>
@@ -46,7 +70,7 @@ class NavBar extends Component {
       <div className="container NavBar">
         <div className="nav-area">
           <div className="nav-button-area">
-            <Link to="/"><img className="icon-image-area icon-arrow" src="../../arrow_for_list_r.png" alt=">" /></Link>
+            <Link to={backpath}><img className="icon-image-area icon-arrow" src="../../arrow_for_list_r.png" alt=">" /></Link>
           </div>
 
           <div className="main-title">
