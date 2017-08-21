@@ -33,9 +33,9 @@ class NavBar extends Component {
     }
 
     // 動作不安定
-    var path = window.location.pathname;
-    var backpath;
-    console.log(path);
+    var path = "/";//window.location.pathname;
+    console.log(this.props.location);
+    var backpath = "/";
     switch(true) {
       case /projects\/*/.test(path):
         backpath = "/projects";
@@ -56,6 +56,8 @@ class NavBar extends Component {
         break;
     }
 
+    var personalValuation = 10000000;
+
     const currentUserBlock =
       <div className="nav-icon-area">
           <Link to={`/users/${state.currentUser.uid}/joined`}>
@@ -73,8 +75,8 @@ class NavBar extends Component {
             <Link to={backpath}><img className="icon-image-area icon-arrow" src="../../arrow_for_list_r.png" alt=">" /></Link>
           </div>
 
-          <div className="main-title">
-            <Link to="/projects">プロジェクト</Link>
+          <div className="main-area">
+            <label>評価額<br/>¥ {personalValuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
           </div>
 
           {currentUserBlock}

@@ -2,6 +2,9 @@
   margin:  0;
   padding: 0;
   width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: black;/*#010C42;*/
 }
 
 .nav-area {
@@ -18,7 +21,7 @@
   padding: 5px;
 }
 
-.main-title {
+.main-area {
   flex: 1;
   text-align: center;
   font-size: 16pt;

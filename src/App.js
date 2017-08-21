@@ -56,7 +56,7 @@ class App extends Component {
     if(state.hideNavbar) {
       return <div></div>;
     }
-    return <NavBar></NavBar>;
+    return <NavBar location="/"></NavBar>;
   }
 
   getDayOrNightClass() {
