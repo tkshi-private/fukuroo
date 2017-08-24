@@ -4,7 +4,8 @@
   width: 100%;
   position: fixed;
   top: 0;
-  background-color: black;/*#010C42;*/
+  background-color: #11287c;
+  z-index: 999;
 }
 
 .nav-area {
@@ -13,22 +14,34 @@
   justify-content:  space-between;
   align-items:      center;
   width: 100%;
-  height: 80px;
+  height: 56px;
 }
 
 .nav-button-area {
   width: 80px;
-  padding: 5px;
+  margin-left: 15px;
 }
 
 .main-area {
   flex: 1;
-  text-align: center;
-  font-size: 16pt;
+  text-align: right;
+  font-size: 12px;
 }
+.main-area label {
+  margin-bottom: 0;
+}
+.personal-valuation {
+  margin-left:10px;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: yellow;
+}
+
 .nav-icon-area {
-  width: 80px;
-  padding: 5px;
+  width: 40px;
+  padding: 0px;
+  margin: 8px 10px;
 }
 .img-circle {
   max-width: 100%;

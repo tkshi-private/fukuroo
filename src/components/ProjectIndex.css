@@ -29,7 +29,7 @@
   justify-content:  space-between;
   align-items:      center;
   width: 100%;
-  padding:3px 5px 5px 10px;
+  padding:10px 0 10px 10px;
   border-top: 1px solid #4e557a;
 }
 
@@ -37,7 +37,7 @@
   width: 60px;
 }
 .button-area {
-  width: 38px;
+  margin-right: 27px;
 }
 .image-area-joined {
   width: 90px;
@@ -63,9 +63,9 @@
   height: 28px;
 }
 .icon-arrow {
-  width:  30px;
-  height: 40px;
-  padding: 0 4px 0 4px;
+  width:  13px;
+  height: 25px;
+  padding: 0;
 }
 
 .label-valuation {

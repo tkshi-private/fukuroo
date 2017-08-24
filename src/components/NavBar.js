@@ -76,7 +76,8 @@ class NavBar extends Component {
           </div>
 
           <div className="main-area">
-            <label>評価額<br/>¥ {personalValuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
+            <label>現在の総評価額</label>
+            <label className="personal-valuation">¥ {personalValuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
           </div>
 
           {currentUserBlock}
