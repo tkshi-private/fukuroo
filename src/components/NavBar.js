@@ -59,7 +59,7 @@ class NavBar extends Component {
     var personalValuation = 10000000;
 
     const currentUserBlock =
-      <div className="nav-icon-area">
+      <div className="navbar-icon-area">
           <Link to={`/users/${state.currentUser.uid}/joined`}>
           <img
             className="img-circle"
@@ -70,14 +70,14 @@ class NavBar extends Component {
 
     return (
       <div className="container NavBar">
-        <div className="nav-area">
-          <div className="nav-button-area">
-            <Link to={backpath}><img className="icon-image-area icon-arrow" src="../../arrow_for_list_r.png" alt=">" /></Link>
+        <div className="navbar-area">
+          <div className="navbar-button-area">
+            <Link to={backpath}><img className="icon-arrow" src="../../arrow_for_list_r.png" alt="<" /></Link>
           </div>
 
-          <div className="main-area">
+          <div className="navbar-lavel-area">
             <label>現在の総評価額</label>
-            <label className="personal-valuation">¥ {personalValuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
+            <label className="label-valuation">¥ {personalValuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
           </div>
 
           {currentUserBlock}

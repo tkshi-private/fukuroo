@@ -3,6 +3,9 @@
   height: 100vh;
   margin-top: -56px;
 }
+.Home--img {
+  max-height: 100%;
+}
 
 .top {
   display: flex;
@@ -17,9 +20,7 @@
   flex: 1 0 auto;
   width: 85%;
 }
-.Home--img {
-  max-height: 100%;
-}
+
 .WakeOrWork {
   flex: 0 0 62px;
 }

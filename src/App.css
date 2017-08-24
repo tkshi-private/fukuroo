@@ -40,6 +40,78 @@ html, body {
   color: white;
 }
 
+
+.label-valuation {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: yellow;
+}
+
+.img-circle {
+  max-width: 100%;
+}
+
+.list-container {
+  display: flex;
+  flex-direction:   column;
+  justify-content:  flex-start;
+  align-items:      stretch;
+  width: 100%;
+}
+.listitem-container {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  space-between;
+  align-items:      center;
+  width: 100%;
+  padding: 0;
+  border-top: 1px solid #4e557a;
+}
+.listitem-thumb-area {
+  margin: 15px;
+  height: 60px;
+  width:  60px;
+  flex: none;
+  display: flex;
+  flex-direction:   column;
+  justify-content:  center;
+  align-items:      stretch;
+}
+.listitem-contents-area {
+  margin: 0;
+  font-size: 11pt;
+  flex: auto;
+}
+.listitem-button-area {
+  margin: 0 27px 0 15px;
+  height: 100%;
+  flex: none;
+}
+
+.thumb-project {
+  max-height: 100%;
+  max-width:  100%;
+}
+
+.project-title {
+  color: white;
+}
+.project-abstract {
+  font-size: 10px;
+  color: #888;
+}
+.icon-arrow {
+  width:  13px;
+  height: 25px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* unknown using */
 .list-group {
   color: black;
 }
@@ -48,7 +120,149 @@ html, body {
   padding-top: 2em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Navbar.css */
+.main-area {
+  flex: 1;
+  text-align: right;
+  font-size: 12px;
+}
+
+/* ProjectIndex.css */
+.user-info {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  flex-start;
+  align-items:      center;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  font-size: 14pt;
+  color: black;
+  background-color: white;
+}
+.user-info img {
+  width: 80px;
+  height: 80px;
+  margin: 0 10px 0 10px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction:   column;
+  justify-content:  flex-start;
+  align-items:      stretch;
+  width: 100%;
+}
+
+.project-container {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  space-between;
+  align-items:      center;
+  width: 100%;
+  padding:10px 0 10px 10px;
+  border-top: 1px solid #4e557a;
+}
+
+.image-area {
+  width: 60px;
+}
+.button-area {
+  margin-right: 27px;
+}
+.image-area-joined {
+  width: 90px;
+  margin-left: -5px;
+}
+.button-area-joined {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  space-around;
+  align-items:  center;
+  width: 68px;
+}
+.icon-owner {
+  width: 22px;
+  height: 22px;
+  margin: 0 4px 0 4px;
+}
+.image-project {
+  width: 60px;
+}
+.icon-image-area {
+  width:  28px;
+  height: 28px;
+}
+.icon-arrow {
+  width:  13px;
+  height: 25px;
+  padding: 0;
+}
+
+.detail-area {
+  margin: 0 10px 0 10px;
+  font-size: 11pt;
+  flex: 1;
+  color: #222;
+}
+
+.title {
+  color: white;
+}
+
+.App--day .title {
+  color: #222;
+}
+img { max-width: 100% }
+
+.flex-create-project {
+  display: flex;
+  flex-direction:   row;
+  justify-content:  flex-end;
+  align-items:      stretch;
+}
+
+#create-project {
+  width: 90px;
+  height: 90px;
+  margin-left: auto;
+}
+
+.abstract {
+  font-size: 10px;
+  color: #888;
+}
+
+/* ProjectShow.css */
+.joined_user_image{
+  display: flex;
+  height: 40px;
+}
+
+.joined_users{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.ProjectShow .list-group {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.ProjectShow .list-group-item {
+  background: rgba(128,128,255,0.4);
+  color: #ddd;
+  border-color: navy;
+}
+
+.btn-blue {
+  background-color: rgba(64,166,200,1);
+  border-color: rgba(44,126,160,1);
+  color: black;
+}
+
+.label {
+  font-weight: 300;
 }
