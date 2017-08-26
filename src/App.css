@@ -106,29 +106,7 @@ html, body {
   height: 25px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* unknown using */
-.list-group {
-  color: black;
-}
-
-.padding-top {
-  padding-top: 2em;
-}
-
-/* Navbar.css */
-.main-area {
-  flex: 1;
-  text-align: right;
-  font-size: 12px;
-}
-
-/* ProjectIndex.css */
-.user-info {
+.userinfo-area {
   display: flex;
   flex-direction:   row;
   justify-content:  flex-start;
@@ -139,97 +117,47 @@ html, body {
   color: black;
   background-color: white;
 }
-.user-info img {
+.userinfo-area img {
   width: 80px;
   height: 80px;
   margin: 0 10px 0 10px;
 }
 
-.list-container {
-  display: flex;
-  flex-direction:   column;
-  justify-content:  flex-start;
-  align-items:      stretch;
-  width: 100%;
-}
-
-.project-container {
-  display: flex;
-  flex-direction:   row;
-  justify-content:  space-between;
-  align-items:      center;
-  width: 100%;
-  padding:10px 0 10px 10px;
-  border-top: 1px solid #4e557a;
-}
-
-.image-area {
-  width: 60px;
-}
-.button-area {
-  margin-right: 27px;
-}
-.image-area-joined {
-  width: 90px;
-  margin-left: -5px;
-}
-.button-area-joined {
-  display: flex;
-  flex-direction:   row;
-  justify-content:  space-around;
-  align-items:  center;
-  width: 68px;
-}
 .icon-owner {
-  width: 22px;
-  height: 22px;
-  margin: 0 4px 0 4px;
-}
-.image-project {
-  width: 60px;
-}
-.icon-image-area {
-  width:  28px;
-  height: 28px;
-}
-.icon-arrow {
-  width:  13px;
+  width: 25px;
   height: 25px;
-  padding: 0;
+  margin: 0 -5px 0 10px;
+  flex: none;
+}
+.icon-volatility {
+  width: 25px;
+  height: 25px;
+  flex: none;
 }
 
-.detail-area {
-  margin: 0 10px 0 10px;
-  font-size: 11pt;
-  flex: 1;
-  color: #222;
-}
-
-.title {
-  color: white;
-}
-
-.App--day .title {
-  color: #222;
-}
-img { max-width: 100% }
-
-.flex-create-project {
+.create-button-area {
   display: flex;
   flex-direction:   row;
   justify-content:  flex-end;
   align-items:      stretch;
 }
 
-#create-project {
+#create-button {
   width: 90px;
   height: 90px;
   margin-left: auto;
 }
 
-.abstract {
-  font-size: 10px;
-  color: #888;
+img { max-width: 100% }
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* unknown using */
+.padding-top {
+  padding-top: 2em;
 }
 
 /* ProjectShow.css */

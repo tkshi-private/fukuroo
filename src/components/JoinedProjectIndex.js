@@ -14,12 +14,18 @@ import users from '../store/user';
 class JoinedProjectIndex extends Component {
   renderUserInfo() {
     const user = _.find(users, u => u.uid === this.props.match.params.id)
-    return (
-      <div className="user-info">
-        <img className="img-circle" src={user.photoURL} />
-        <div>{user.name}</div>
-      </div>
-    );
+    if(user){
+      return (
+        <div className="userinfo-area">
+          <img className="img-circle" src={user.photoURL} />
+          <div>{user.name}</div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="userinfo-area"></div>
+      );
+    }
   }
 
   render() {
@@ -32,21 +38,31 @@ class JoinedProjectIndex extends Component {
     });
 
     const list = _.map(ownProjects, (project) => {
+      var projectTitle;
+      if(project.title.length > 18){
+        projectTitle = project.title.substring(0, 18) + "...";
+      } else {
+        projectTitle = project.title;
+      }
       return (
         <Link to={`/projects/${project.pid}`}>
-        <div className="project-container" key={project.pid}>
-          <div className="image-area-joined">
-            <img className="icon-owner" src="../../05_jolined_project_list_icon_owner.png" alt=">" />
+        <div className="listitem-container" key={project.pid}>
+          <div className="icon-owner">
+            <img src="../../05_jolined_project_list_icon_owner.png" alt=">" />
+          </div>
+          <div className="listitem-thumb-area">
             <img className="image-project" src={project.image_url} alt="icon" />
           </div>
-          <div className="detail-area">
+          <div className="listitem-contents-area">
             <div className="label-valuation">{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</div>
-            <div className="title">{`${project.title.substring(0,12)}...`}</div>
-            <div className="abstract">{`${project.abstract.substring(0,24)}...`}</div>
+            <div className="project-title">{projectTitle}</div>
+            <div className="project-abstract">{`${project.abstract.substring(0,21)}...`}</div>
           </div>
-          <div className="button-area-joined">
-            <img className="icon-image-area" src="../../05_jolined_project_list_icon_up.png" alt=">" />
-            <img className="icon-image-area icon-arrow" src="../../arrow_for_list.png" alt=">" />
+          <div className="icon-volatility">
+            <img src="../../05_jolined_project_list_icon_up.png" alt="+" />
+          </div>
+          <div className="listitem-button-area">
+            <img className="icon-arrow" src="../../arrow_for_list.png" alt=">" />
           </div>
         </div>
         </Link>
@@ -59,8 +75,8 @@ class JoinedProjectIndex extends Component {
         <div className="list-container">
           {list}
         </div>
-        <div className="flex-create-project">
-          <Link to="/new-project"><img id="create-project" src="../../05_jolined_project_list_btn_add_progect.png" alt=">" /></Link>
+        <div className="create-button-area">
+          <Link to="/new-project"><img id="create-button" src="../../05_jolined_project_list_btn_add_progect.png" alt="+" /></Link>
         </div>
       </div>
     );
