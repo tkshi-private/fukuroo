@@ -1,0 +1,45 @@
+.ProjectShow {
+  padding: 5px 15px;
+}
+
+.projectshow-title {
+  font-size: 22pt;
+  height: 50px;
+  display: flex;
+  flex-direction:   row;
+  justify-content:  flex-start;
+  align-items:      center;
+}
+.projectshow-img {
+}
+.projectshow-valuation {
+  font-size: 12pt;
+  margin: 10px 0;
+}
+.projectshow-chart {
+}
+.projectshow-startdate {
+  font-size: 12pt;
+}
+.projectshow-abstract {
+  font-size: 12pt;
+  background-color: #3366CC;
+  margin: 5px 0 0 0;
+  padding: 10px;
+  border-radius:          10px;
+  -webkit-border-radius:  10px;
+  -moz-border-radius:     10px;
+}
+.projectshow-abstract {
+}
+
+.ProjectShow .list-group {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.ProjectShow .list-group-item {
+  background: rgba(128,128,255,0.4);
+  color: #ddd;
+  border-color: navy;
+}

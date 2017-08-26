@@ -72,19 +72,23 @@ class ProjectShow extends Component {
 
     return (
       <div className="ProjectShow">
-        <h1>{project.title}</h1>
-        <img src={project.image_url} alt={project.title}/>
-        <div>
+        <div className="projectshow-title">
+          {project.title}
+        </div>
+        <div className="projectshow-img">
+          <img src={project.image_url} alt={project.title}/>
+        </div>
+        <div className="projectshow-valuation">
+          時価評価額：<span className="label-valuation projectshow-valuation">{`¥ ${project.valuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}`}</span>
+        </div>
+        <div className="projectshow-chart">
           <SimpleAreaChart project={project}/>
         </div>
-        <div>
-          プロジェクトの日付：{project.created_at}
+        <div className="projectshow-startdate">
+          開始日：{project.created_at}
         </div>
-        <div>
-          プロジェクトの時価評価額：{project.valuation}
-        </div>
-        <div>
-          プロジェクトの概要：{project.abstract}
+        <div className="projectshow-abstract">
+          {project.abstract}
         </div>
 
         <div>
@@ -98,7 +102,7 @@ class ProjectShow extends Component {
             })}
           </ul>
         </div>
-        <div>
+        <div className="projectshow-owenerid">
           プロジェクトオーナー：{project.owner}<br />
           {/* プロジェクトメンバー：{project.members}  */}
         </div>
