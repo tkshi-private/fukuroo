@@ -26,6 +26,7 @@ export function startSyncFirebaseData(){
       name: user.displayName || user.name,
       email: user.email,
       photoURL: user.photoURL,
+      valuation: user.valuation,
     }
     return userObject;
   }

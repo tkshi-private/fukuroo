@@ -33,8 +33,7 @@ class NavBar extends Component {
     }
 
     // 動作不安定
-    var path = "/";//window.location.pathname;
-    console.log(this.props.location);
+    var path = "/";
     var backpath = "/";
     switch(true) {
       case /projects\/*/.test(path):
@@ -56,7 +55,8 @@ class NavBar extends Component {
         break;
     }
 
-    var personalValuation = 10000000;
+    //const user = _.find(users, u => u.uid === this.props.match.params.id)
+    var personalValuation = userObject.valuation ? userObject.valuation : 0;
 
     const currentUserBlock =
       <div className="navbar-icon-area">
