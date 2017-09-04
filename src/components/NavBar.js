@@ -27,14 +27,13 @@ class NavBar extends Component {
     let userObject = _.find(users, d =>
       d.email === state.currentUser.email
     );
-
     if(!userObject) {
       userObject = state.currentUser;
     }
 
     // 動作不安定
     var path = "/";
-    var backpath = "/";
+    var backpath = "/projects";
     switch(true) {
       case /projects\/*/.test(path):
         backpath = "/projects";
@@ -55,9 +54,6 @@ class NavBar extends Component {
         break;
     }
 
-    //const user = _.find(users, u => u.uid === this.props.match.params.id)
-    var personalValuation = userObject.valuation ? userObject.valuation : 0;
-
     const currentUserBlock =
       <div className="navbar-icon-area">
           <Link to={`/users/${state.currentUser.uid}/joined`}>
@@ -77,7 +73,7 @@ class NavBar extends Component {
 
           <div className="navbar-lavel-area">
             <label>現在の総評価額</label>
-            <label className="label-valuation">¥ {personalValuation.toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
+            <label className="label-valuation">¥ {(state.currentUser.valuation ? state.currentUser.valuation : 0).toString().replace(/(\d)(?=(\d{3})+$)/g,'$1,')}</label>
           </div>
 
           {currentUserBlock}

@@ -118,17 +118,18 @@ class ProjectShow extends Component {
   renderMember(member, key) {
     let button = '';
     const project = _.find(projects, p => p.pid === this.props.match.params.id)
-    // console.log(member.stock_share)
-    // console.log(project.valuation)
+
+    var sharedProjectValuation = (Number(member.stock_share.replace('%','') / 100) * project.valuation);
+
     if(!member.uid && !this.hasAlreadyRole()) {
       button = (
-        <button className="btn btn-blue btn-block" onClick={(event) => this.joinAsMember(event, key)}>
+        <button className="btn btn-blue btn-block" onClick={(event) => this.joinAsMember(event, key, sharedProjectValuation)}>
           参加する
         </button>
       )
     } else if(state.currentUser && member.uid === state.currentUser.uid){
       button = (
-        <button className="btn btn-danger btn-block" onClick={(event) => this.removeMember(event, key)}>
+        <button className="btn btn-danger btn-block" onClick={(event) => this.removeMember(event, key, sharedProjectValuation)}>
           やめる
         </button>
       )
@@ -145,8 +146,8 @@ class ProjectShow extends Component {
             {this.renderUserByUid(member.uid)}<br/>
             役割 {member.role}<br/>
             報酬株 {member.stock_share}<br/>
-            現在評価額 ¥{(Number(member.stock_share.replace('%','') / 100) * project.valuation).toLocaleString()}
-          </div> 
+            現在評価額 ¥{sharedProjectValuation}
+          </div>
         </div>
 
         <div className="row">
@@ -182,24 +183,44 @@ class ProjectShow extends Component {
     )
   }
 
-  joinAsMember(event, memberIndex) {
+  joinAsMember(event, memberIndex, spv) {
     event.preventDefault();
     const project = _.find(projects, p => p.pid === this.props.match.params.id)
     project.members[memberIndex].uid = state.currentUser.uid;
 
+    if(state.currentUser.valuation) {
+      state.currentUser.valuation = Number(state.currentUser.valuation) + Number(spv);
+    } else {
+      state.currentUser.valuation = Number(spv);
+    }
+
     const updates = {};
     updates['/projects/' + this.props.match.params.id] = project;
+    updates['/users/' + state.currentUser.uid + '/valuation'] = Number(state.currentUser.valuation);
     // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
 
     return firebase.database().ref().update(updates);
   }
 
-  removeMember(event, memberIndex) {
+  removeMember(event, memberIndex, spv) {
     event.preventDefault();
     const project = _.find(projects, p => p.pid === this.props.match.params.id)
     project.members[memberIndex].uid = '';
+
+    let userObject = _.find(users, u =>
+      u.uid === state.currentUser.uid
+    );
+
+    if(state.currentUser.valuation) {
+      state.currentUser.valuation = Number(state.currentUser.valuation) - Number(spv);
+      if(state.currentUser.valuation <= 0) state.currentUser.valuation = 0;
+    } else {
+      state.currentUser.valuation = 0;
+    }
+
     const updates = {};
     updates['/projects/' + this.props.match.params.id] = project;
+    updates['/users/' + state.currentUser.uid + '/valuation'] = Number(state.currentUser.valuation);
     // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
 
     return firebase.database().ref().update(updates);
